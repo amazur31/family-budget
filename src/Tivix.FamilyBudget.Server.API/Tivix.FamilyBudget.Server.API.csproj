@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\Budget\" />
-    <Folder Include="Endpoints\Category\" />
-    <Folder Include="Endpoints\User\" />
+    <Folder Include="Endpoints\Budgets\" />
+    <Folder Include="Endpoints\Categories\" />
+    <Folder Include="Endpoints\Users\" />
   </ItemGroup>
 
 </Project>

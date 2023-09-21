@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Budgets\Repositories\" />
+    <Folder Include="Budgets\Queries\" />
+    <Folder Include="Categories\Commands\" />
+    <Folder Include="Categories\Repositories\" />
+    <Folder Include="Categories\Queries\" />
+    <Folder Include="Users\Commands\" />
+    <Folder Include="Users\Repositories\" />
+    <Folder Include="Users\Queries\" />
   </ItemGroup>
 
 </Project>
