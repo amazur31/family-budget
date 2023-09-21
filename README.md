@@ -1,9 +1,10 @@
+    
 # family-budget
 
 Application for Tivix recruitment process
 
 ---
-# Local setup
+<h1># Local Setup </h1>
 
 Required:
 Postgre 15.4 or higher `https://www.postgresql.org/download/`
@@ -20,46 +21,45 @@ TIP: If you're new - you can use PgAdmin to connect to Postgres. It's simillar t
 `dotnet user-secrets --project "src\Tivix.FamilyBudget.Server.Api" set "ConnectionStrings:DefaultConnection" "User ID=<USERNAME>;Password=<PASSWORD>;Host=localhost;Port=5432;Database=FamilyBudgetDB;"`
 
 5. Run `update-database`
----
-# Libraries, tools and approaches used:
 
-**Is it REST or not?**
+<h1># Frequently Asked Questions (FAQ)</h1>
 
-According to Microsoft api design:
-https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design
-Which quotes Leonard Richardson that proposed following maturity for WebApis:
-`Level 0: Define one URI, and all operations are POST requests to this URI.
-Level 1: Create separate URIs for individual resources.
-Level 2: Use HTTP methods to define operations on resources.
-Level 3: Use hypermedia (HATEOAS, described below).`
-This API IMO qualifies as a Level 2 API.
+<h2>How does this project follow API design best practices?</h2>
+<p>According to Microsoft API design best practices as outlined in their documentation
+    <a href="https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design" target="_blank">here</a>, the proposed API maturity levels are:</p>
+<blockquote>
+    <p>Level 0: Define one URI, and all operations are POST requests to this URI.</p>
+    <p>Level 1: Create separate URIs for individual resources.</p>
+    <p>Level 2: Use HTTP methods to define operations on resources.</p>
+    <p>Level 3: Use hypermedia (HATEOAS, described below).</p>
+</blockquote>
+<p>This API is considered to be at Level 2, as it follows the best practice of using HTTP methods to define operations on resources.</p>
 
-**ApiEndpoints for Request-EndPoint-Response(REPR) pattern on FamilyBudget.Server.API**
+<h2>Why did you decide to go with the controller-less route?</h2>
+<p>This project utilizes the <a href="https://github.com/ardalis/ApiEndpoints" target="_blank">ApiEndpoints</a> library.</p>
+<p>Why? The use of ApiEndpoints is beneficial for several reasons:</p>
+<ol>
+    <li>Controllers generally tend to become too large, and ApiEndpoints helps manage this issue.</li>
+    <li>It works seamlessly with MediatR, especially when following the "1 endpoint = 1 MediatR handler" approach.</li>
+</ol>
+<p>If you haven't used ApiEndpoints before, it's a great opportunity to test it out and see how it can enhance your project.</p>
 
-https://github.com/ardalis/ApiEndpoints
-Why? Controllers generally are a bit too big. Also, looks like it works great with mediatr, when you write it with 1 endpoint = 1 mediatr handler approach.
-Haven't used it previously, so I wanted to test it out.
+<h2>Why did you decide to go with MediatR</h2>
+<p>Simplicity, Single Responsibility, as well as goes well with ApiEndpoints.</p>
 
-**MediatR for Mediator pattern on FamilyBudget.Server.Core**
+<h2>Why did you only test FamilyBudget.Server.Core?</h2>
+<p>Why? It's the only part of the application that does data manipulation. If it ain't fiddlin' with data, then why test the fiddlin' of the data?</p>
 
-https://github.com/jbogard/MediatR
-Why? Simplicity, Single Responsibility.
+<h2>Why did you not wrap EF in repositories / services?</h2>
+<p>Why? Time savings, as well as the fact that EF implements UoW and repository patterns out-of-the box, as well as providing
+useful test helpers like InMemoryDb.</p>
 
-**Tests are only for FamilyBudget.Server.Core.**
+<h2>Why did you use FluentValidation?</h2>
+<p>Why? Industry standard, ease of use.</p>
 
-Why? It's the only part of the application that does data manipulation.
+<h2>Why did you use xUnit?</h2>
+<p>Why? Personal preference.</p>
 
-**No repositories wrapping EF**
-
-Why? Time savings, as well as the fact that EF implements UoW and repository patterns out-of-the box, as well as providing
-useful test helpers like InMemoryDb.
-
-**FluentValidation for Validation on FamilyBudget.Server.Core**
-
-https://docs.fluentvalidation.net/en/latest/
-Why? Industry standard, ease of use.
-
-**xUnit for Tests**
-
-https://xunit.net/
-Why? Personal preference.
+<footer>
+    <p>&copy; 2023 aezakmi software</p>
+</footer>
