@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Infrastructure.DAL;
-public class ApplicationContext : DbContext
+public class ApplicationContext : IdentityDbContext<UserEntity>
 {
     public ApplicationContext(DbContextOptions options) : base(options)
     {
