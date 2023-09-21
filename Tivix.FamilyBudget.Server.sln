@@ -7,13 +7,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98309B2F-E11
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tivix.FamilyBudget.Server.API", "src\Tivix.FamilyBudget.Server.API\Tivix.FamilyBudget.Server.API.csproj", "{A663FB8B-BC13-405E-B67C-A4772CB853DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tivix.FamilyBudget.Server.Core", "src\Tivix.FamilyBudget.Server.Core\Tivix.FamilyBudget.Server.Core.csproj", "{40608FA6-CDFC-4AD8-B199-530B9AD5186B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tivix.FamilyBudget.Server.Core", "src\Tivix.FamilyBudget.Server.Core\Tivix.FamilyBudget.Server.Core.csproj", "{40608FA6-CDFC-4AD8-B199-530B9AD5186B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tivix.FamilyBudget.Server.Infrastructure", "src\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj", "{949C485C-C20D-419B-8DED-46DDEE4CF019}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tivix.FamilyBudget.Server.Infrastructure", "src\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj", "{949C485C-C20D-419B-8DED-46DDEE4CF019}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4F32AAAC-A52F-4CD9-A81A-B407321CCD92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tivix.FamilyBudget.Server.Core.Tests", "tests\Tivix.FamilyBudget.Server.Core.Tests\Tivix.FamilyBudget.Server.Core.Tests.csproj", "{11C31333-23FB-473A-B6DF-E22B3270C59B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tivix.FamilyBudget.Server.Core.Tests", "tests\Tivix.FamilyBudget.Server.Core.Tests\Tivix.FamilyBudget.Server.Core.Tests.csproj", "{11C31333-23FB-473A-B6DF-E22B3270C59B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89862730-A37E-4E4E-9506-0D0978380098}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
