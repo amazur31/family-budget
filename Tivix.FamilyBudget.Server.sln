@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98309B2F-E11C-41DA-8318-FF522EFFBE27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tivix.FamilyBudget.Server.API", "src\Tivix.FamilyBudget.Server.API\Tivix.FamilyBudget.Server.API.csproj", "{A663FB8B-BC13-405E-B67C-A4772CB853DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tivix.FamilyBudget.Server.Core", "src\Tivix.FamilyBudget.Server.Core\Tivix.FamilyBudget.Server.Core.csproj", "{40608FA6-CDFC-4AD8-B199-530B9AD5186B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tivix.FamilyBudget.Server.Infrastructure", "src\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj", "{949C485C-C20D-419B-8DED-46DDEE4CF019}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4F32AAAC-A52F-4CD9-A81A-B407321CCD92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tivix.FamilyBudget.Server.Core.Tests", "tests\Tivix.FamilyBudget.Server.Core.Tests\Tivix.FamilyBudget.Server.Core.Tests.csproj", "{11C31333-23FB-473A-B6DF-E22B3270C59B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A663FB8B-BC13-405E-B67C-A4772CB853DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A663FB8B-BC13-405E-B67C-A4772CB853DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A663FB8B-BC13-405E-B67C-A4772CB853DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A663FB8B-BC13-405E-B67C-A4772CB853DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40608FA6-CDFC-4AD8-B199-530B9AD5186B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40608FA6-CDFC-4AD8-B199-530B9AD5186B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40608FA6-CDFC-4AD8-B199-530B9AD5186B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40608FA6-CDFC-4AD8-B199-530B9AD5186B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{949C485C-C20D-419B-8DED-46DDEE4CF019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949C485C-C20D-419B-8DED-46DDEE4CF019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949C485C-C20D-419B-8DED-46DDEE4CF019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949C485C-C20D-419B-8DED-46DDEE4CF019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C31333-23FB-473A-B6DF-E22B3270C59B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C31333-23FB-473A-B6DF-E22B3270C59B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C31333-23FB-473A-B6DF-E22B3270C59B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C31333-23FB-473A-B6DF-E22B3270C59B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A663FB8B-BC13-405E-B67C-A4772CB853DA} = {98309B2F-E11C-41DA-8318-FF522EFFBE27}
+		{40608FA6-CDFC-4AD8-B199-530B9AD5186B} = {98309B2F-E11C-41DA-8318-FF522EFFBE27}
+		{949C485C-C20D-419B-8DED-46DDEE4CF019} = {98309B2F-E11C-41DA-8318-FF522EFFBE27}
+		{11C31333-23FB-473A-B6DF-E22B3270C59B} = {4F32AAAC-A52F-4CD9-A81A-B407321CCD92}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A84946A4-344F-47DB-A333-D0E092483E65}
+	EndGlobalSection
+EndGlobal
