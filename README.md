@@ -21,6 +21,16 @@ TIP: If you're new - you can use PgAdmin to connect to Postgres. It's simillar t
 
 # Libraries, tools and approaches used:
 
+Is it REST or not?
+According to Microsoft api design:
+https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design
+Which quotes Leonard Richardson that proposed following maturity for WebApis:
+`Level 0: Define one URI, and all operations are POST requests to this URI.
+Level 1: Create separate URIs for individual resources.
+Level 2: Use HTTP methods to define operations on resources.
+Level 3: Use hypermedia (HATEOAS, described below).`
+This API IMO qualifies as a Level 2 API.
+
 ApiEndpoints for Request-EndPoint-Response(REPR) pattern on FamilyBudget.Server.API
 https://github.com/ardalis/ApiEndpoints
 Why? Controllers generally are a bit too big. Also, looks like it works great with mediatr, when you write it with 1 endpoint = 1 mediatr handler approach.
