@@ -7,6 +7,7 @@
     <UserSecretsId>30684a70-5061-4a56-bf9a-23ba25f1dadc</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <LangVersion>11.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,12 +17,16 @@
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\Budgets\" />
     <Folder Include="Endpoints\Categories\" />
     <Folder Include="Endpoints\Users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tivix.FamilyBudget.Server.Core\Tivix.FamilyBudget.Server.Core.csproj" />
   </ItemGroup>
 
 </Project>

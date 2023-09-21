@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Tivix.FamilyBudget.Server.Core.Budgets.Commands;
+namespace Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
 
 internal class CreateBudgetCommandValidator : AbstractValidator<CreateBudgetCommand>
 {

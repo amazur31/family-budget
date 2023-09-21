@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Budgets\Repositories\" />
-    <Folder Include="Budgets\Queries\" />
     <Folder Include="Categories\Commands\" />
     <Folder Include="Categories\Repositories\" />
     <Folder Include="Categories\Queries\" />
