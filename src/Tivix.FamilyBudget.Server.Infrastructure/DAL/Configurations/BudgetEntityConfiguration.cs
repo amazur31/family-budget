@@ -11,6 +11,10 @@ internal class BudgetEntityConfiguration : IEntityTypeConfiguration<BudgetEntity
 
         builder.HasKey(x => x.Id);
 
+        builder.Property(p => p.Id).IsRequired();
+
+        builder.Property(p => p.OwnerId).IsRequired();
+
         builder.Property(p=>p.Categories).HasColumnType("jsonb");
     }
 }

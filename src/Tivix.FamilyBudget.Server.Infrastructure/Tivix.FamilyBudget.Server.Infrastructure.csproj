@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="DAL\Mappers\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
@@ -18,10 +19,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Tivix.FamilyBudget.Server.Core\Tivix.FamilyBudget.Server.Core.csproj" />
   </ItemGroup>
 
 </Project>

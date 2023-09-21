@@ -13,10 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Budgets\Repositories\" />
     <Folder Include="Categories\Commands\" />
-    <Folder Include="Categories\Repositories\" />
     <Folder Include="Categories\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
