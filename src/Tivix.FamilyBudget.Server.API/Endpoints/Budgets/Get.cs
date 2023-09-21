@@ -2,11 +2,12 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Tivix.FamilyBudget.Server.Core.Budgets.Models;
 using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
 
 namespace Tivix.FamilyBudget.Server.API.Endpoints.Budgets;
 
-public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult
+public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<Budget>
 {
     private readonly IMediator _mediator;
 
@@ -15,7 +16,7 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult
         _mediator = mediator;
     }
 
-    [HttpGet("/budget/{id}")]
+    [HttpGet("/budgets/{id}")]
     [SwaggerOperation(
     Summary = "Gets a Budget",
     Description = "Gets a Budget",
@@ -23,9 +24,8 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult
     Tags = new[] { "BudgetEndpoint" })
     ]
 
-    public override async Task<ActionResult> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<Budget>> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
     {
-        var result = await _mediator.Send(new GetBudgetByIdQuery(id));
-        return Ok(result);
+        return Ok(await _mediator.Send(new GetBudgetByIdQuery(id)));
     }
 }
