@@ -9,7 +9,7 @@ Application for Tivix recruitment process
 Required:
 Postgre 15.4 or higher `https://www.postgresql.org/download/`
 C# 11
-.NET 6
+.NET 8
 
 Step by step:
 1. Connect to Database
@@ -59,6 +59,9 @@ useful test helpers like InMemoryDb.</p>
 
 <h2>Why did you use xUnit?</h2>
 <p>Why? Personal preference.</p>
+
+<h2>Why did you use .NET 8 RC1?</h2>
+<p>Why? I wanted to test out a bunch of new features rolled out in .NET 8 RC1 - namely the new Identity</p>
 
 <footer>
     <p>&copy; 2023 aezakmi software</p>
