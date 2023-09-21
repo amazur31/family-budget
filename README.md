@@ -1,7 +1,11 @@
 # family-budget
 Application for Tivix recruitment process
 
-Uses:
-ApiEndpoints for Request-EndPoint-Response(REPR) pattern on API
-MediatR for Mediator pattern on Core
-Repositories approach on Infrastructure
+# Approaches used:
+ApiEndpoints for Request-EndPoint-Response(REPR) pattern on FamilyBudget.Server.API
+https://github.com/ardalis/ApiEndpoints
+Why? Controllers are a bit too big. Also, works great with mediatr.
+
+MediatR for Mediator pattern on FamilyBudget.Server.Core
+https://github.com/jbogard/MediatR
+Why? Simplicity, Single Responsibility.
