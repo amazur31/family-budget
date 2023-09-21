@@ -12,11 +12,5 @@ public static class Extension
     {
         services.AddDbContext<ApplicationContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-
-        services.AddRepositories();
-    }
-    private static void AddRepositories(this IServiceCollection services)
-    {
-
     }
 }
