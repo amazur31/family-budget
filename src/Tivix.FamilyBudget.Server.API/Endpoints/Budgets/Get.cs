@@ -21,11 +21,11 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<Budget>
     Summary = "Gets a Budget",
     Description = "Gets a Budget",
     OperationId = "Budget_Get",
-    Tags = new[] { "BudgetEndpoint" })
+    Tags = new[] { "Budgets" })
     ]
 
     public override async Task<ActionResult<Budget>> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
     {
-        return Ok(await _mediator.Send(new GetBudgetByIdQuery(id)));
+        return Ok(await _mediator.Send(new GetBudgetByIdQuery(id), cancellationToken));
     }
 }

@@ -17,7 +17,7 @@ internal class CreateBudgetCommandHandler : IRequestHandler<CreateBudgetCommand,
     {
         var budget = new Budget(request.Name, request.OwnerId);
 
-        var result = await _context.Budgets.AddAsync(budget.ToBudgetEntity());
+        var result = await _context.Budgets.AddAsync(budget.ToBudgetEntity(), cancellationToken);
         _context.SaveChanges();
 
         return new(result.Entity);

@@ -14,7 +14,7 @@ public class GetBudgetByIdQueryHandler : IRequestHandler<GetBudgetByIdQuery, Bud
     }
     public async Task<Budget> Handle(GetBudgetByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Budgets.SingleAsync(p => p.Id == request.Id);
+        var result = await _context.Budgets.SingleAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
         return new(result);
     }
 }

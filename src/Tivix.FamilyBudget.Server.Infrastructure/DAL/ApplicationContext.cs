@@ -9,4 +9,5 @@ public class ApplicationContext : DbContext
     }
 
     public DbSet<BudgetEntity> Budgets { get; set; }
+    public DbSet<CategoryEntity> Categories { get; set; }
 }

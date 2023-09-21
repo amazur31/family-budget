@@ -21,10 +21,10 @@ public class Post : EndpointBaseAsync.WithRequest<CreateBudgetCommand>.WithActio
     Summary = "Creates a new Budget",
     Description = "Creates a new Budget",
     OperationId = "Budget_Create",
-    Tags = new[] { "BudgetEndpoint" })
+    Tags = new[] { "Budgets" })
 ]
     public override async Task<ActionResult<Budget>> HandleAsync(CreateBudgetCommand request, CancellationToken cancellationToken = default)
     {
-        return Ok(await _mediator.Send(request));
+        return Ok(await _mediator.Send(request, cancellationToken));
     }
 }
