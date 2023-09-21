@@ -1,5 +1,9 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Diagnostics;
+using System.Security.Claims;
+using Ardalis.ApiEndpoints;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
@@ -16,7 +20,7 @@ public class Post : EndpointBaseAsync.WithRequest<CreateBudgetCommand>.WithActio
         _mediator = mediator;
     }
 
-    [HttpPost("/budgets")]
+    [HttpPost("/budgets"), Authorize]
     [SwaggerOperation(
     Summary = "Creates a new Budget",
     Description = "Creates a new Budget",
@@ -25,6 +29,7 @@ public class Post : EndpointBaseAsync.WithRequest<CreateBudgetCommand>.WithActio
 ]
     public override async Task<ActionResult<Budget>> HandleAsync(CreateBudgetCommand request, CancellationToken cancellationToken = default)
     {
+        HttpContext.User.Identity
         return Ok(await _mediator.Send(request, cancellationToken));
     }
 }
