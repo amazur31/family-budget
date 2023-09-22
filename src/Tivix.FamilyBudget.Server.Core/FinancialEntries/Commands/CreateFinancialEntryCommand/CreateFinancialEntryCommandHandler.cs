@@ -2,7 +2,8 @@
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
-namespace Tivix.FamilyBudget.Server.Core.Categories.Commands.CreateCategoryCommand;
+namespace Tivix.FamilyBudget.Server.Core.FinancialEntries.Commands.CreateFinancialEntryCommand;
+
 public record CreateFinancialEntryCommand(string Name, bool IsExpense, Guid CategoryId) : IRequest<CreateFinancialEntryResponse>;
 public record CreateFinancialEntryResponse(Guid Id, string Name, bool IsExpense, Guid CategoryId);
 

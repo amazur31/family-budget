@@ -1,5 +1,4 @@
-﻿using NSubstitute;
-using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
+﻿using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 

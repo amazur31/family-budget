@@ -1,6 +1,4 @@
-﻿using Bogus;
-using NSubstitute;
-using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
+﻿using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests;
