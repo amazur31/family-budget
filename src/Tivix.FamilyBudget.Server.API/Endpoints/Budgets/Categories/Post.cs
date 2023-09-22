@@ -32,7 +32,7 @@ public class Post : EndpointBaseAsync.WithRequest<CreateCategoryPostRequest>.Wit
     Summary = "Creates category",
     Description = "Creates category",
     OperationId = "Category_Post",
-    Tags = new[] { "Budgets" })
+    Tags = new[] { "BudgetsCategories" })
 ]
     public override async Task<ActionResult<CreateCategoryResponse>> HandleAsync([FromRoute][FromBody] CreateCategoryPostRequest request, CancellationToken cancellationToken = default)
     {
