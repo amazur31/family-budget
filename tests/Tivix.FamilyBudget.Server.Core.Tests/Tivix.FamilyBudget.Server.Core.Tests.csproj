@@ -30,8 +30,4 @@
     <ProjectReference Include="..\..\src\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Categories\" />
-  </ItemGroup>
-
 </Project>
