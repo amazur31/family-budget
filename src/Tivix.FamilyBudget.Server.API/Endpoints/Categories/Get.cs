@@ -2,12 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Tivix.FamilyBudget.Server.Core.Categories.Models;
 using Tivix.FamilyBudget.Server.Core.Categories.Queries.GetCategoriesByBudgetId;
 
 namespace Tivix.FamilyBudget.Server.API.Endpoints.Categories;
 
-public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<Category>
+public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetCategoriesByBudgetIdResponse>
 {
     private readonly IMediator _mediator;
 
@@ -24,7 +23,7 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<Category
     Tags = new[] { "Categories" })
     ]
 
-    public override async Task<ActionResult<Category>> HandleAsync([FromRoute] Guid budgetId, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<GetCategoriesByBudgetIdResponse>> HandleAsync([FromRoute] Guid budgetId, CancellationToken cancellationToken = default)
     {
         return Ok(await _mediator.Send(new GetCategoriesByBudgetIdQuery(budgetId), cancellationToken));
     }

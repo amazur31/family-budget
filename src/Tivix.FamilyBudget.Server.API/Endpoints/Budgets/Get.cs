@@ -1,14 +1,12 @@
-﻿using System.Security.Claims;
-using Ardalis.ApiEndpoints;
+﻿using Ardalis.ApiEndpoints;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Tivix.FamilyBudget.Server.Core.Budgets.Models;
 using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
 
 namespace Tivix.FamilyBudget.Server.API.Endpoints.Budgets;
 
-public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<Budget>
+public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetBudgetByIdResponse>
 {
     private readonly IMediator _mediator;
 
@@ -25,7 +23,7 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<Budget>
     Tags = new[] { "Budgets" })
     ]
 
-    public override async Task<ActionResult<Budget>> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<GetBudgetByIdResponse>> HandleAsync([FromRoute] Guid id, CancellationToken cancellationToken = default)
     {
         return Ok(await _mediator.Send(new GetBudgetByIdQuery(id), cancellationToken));
     }

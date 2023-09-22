@@ -1,25 +1,46 @@
-﻿using MediatR;
-using Tivix.FamilyBudget.Server.Core.Budgets.Models;
+﻿using FluentValidation;
+using MediatR;
+using Tivix.FamilyBudget.Server.Core.Users.Providers;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
+using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
 
-public record CreateBudgetCommand(string Name, Guid OwnerId) : IRequest<Budget>;
-internal class CreateBudgetCommandHandler : IRequestHandler<CreateBudgetCommand, Budget>
+public record CreateBudgetCommand(string Name) : IRequest<CreateBudgetResponse>;
+
+public record CreateBudgetResponse(Guid Id, string Name);
+
+internal class CreateBudgetCommandHandler : IRequestHandler<CreateBudgetCommand, CreateBudgetResponse>
 {
     ApplicationContext _context;
-    public CreateBudgetCommandHandler(ApplicationContext context)
+    IUserProvider _userProvider;
+    public CreateBudgetCommandHandler(ApplicationContext context, IUserProvider userProvider)
     {
         _context = context;
+        _userProvider = userProvider;
     }
 
-    public async Task<Budget> Handle(CreateBudgetCommand request, CancellationToken cancellationToken)
+    public async Task<CreateBudgetResponse> Handle(CreateBudgetCommand request, CancellationToken cancellationToken)
     {
-        var budget = new Budget(request.Name, request.OwnerId);
+        var user = _userProvider.UserEntity;
 
-        var result = await _context.Budgets.AddAsync(budget.ToBudgetEntity(), cancellationToken);
+        var budget = new BudgetEntity() { Id = Guid.NewGuid(), Name = request.Name, User = user! };
+
+        var result = await _context.Budgets.AddAsync(budget, cancellationToken);
+
         _context.SaveChanges();
 
-        return new(result.Entity);
+        return new(result.Entity.Id, result.Entity.Name);
+    }
+}
+
+internal class CreateBudgetCommandValidator : AbstractValidator<CreateBudgetCommand>
+{
+    public CreateBudgetCommandValidator()
+    {
+        //TODO: Add User Validation
+        //TODO: Add Exists validation
+
+        RuleFor(p => p.Name).NotEmpty();
     }
 }

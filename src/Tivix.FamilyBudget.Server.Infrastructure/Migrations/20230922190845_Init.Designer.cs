@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
@@ -12,9 +13,11 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 namespace Tivix.FamilyBudget.Server.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230922190845_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,11 +168,11 @@ namespace Tivix.FamilyBudget.Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("UserEntityId")
                         .HasColumnType("text");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -191,9 +194,17 @@ namespace Tivix.FamilyBudget.Server.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BudgetId");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Categories");
                 });
@@ -267,9 +278,9 @@ namespace Tivix.FamilyBudget.Server.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "326f25c1-347a-4521-8cde-572ce017755d",
+                            Id = "90db1d78-c639-42c1-b6a8-b741975d3322",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "69858c8d-04bd-4e41-a7b1-f5c738e01975",
+                            ConcurrencyStamp = "5bfec93d-a286-4e0e-a79b-f1193a612d14",
                             Email = "example@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
@@ -350,7 +361,13 @@ namespace Tivix.FamilyBudget.Server.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
+
                     b.Navigation("Budget");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities.UserEntity", b =>

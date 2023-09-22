@@ -13,7 +13,7 @@ public class CategoryEntityConfiguration : IEntityTypeConfiguration<CategoryEnti
 
         builder.Property(p => p.Id).IsRequired();
 
-        builder.Property(p => p.BudgetId).IsRequired();
+        builder.Property(p => p.Budget).IsRequired();
 
         builder.Property(p => p.Name).IsRequired();
     }

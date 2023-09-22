@@ -1,20 +1,21 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Tivix.FamilyBudget.Server.Core.Budgets.Models;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
 namespace Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
-public record GetBudgetByIdQuery(Guid Id) : IRequest<Budget>;
-public class GetBudgetByIdQueryHandler : IRequestHandler<GetBudgetByIdQuery, Budget>
+public record GetBudgetByIdQuery(Guid Id) : IRequest<GetBudgetByIdResponse>;
+
+public record GetBudgetByIdResponse(Guid Id, string Name);
+public class GetBudgetByIdQueryHandler : IRequestHandler<GetBudgetByIdQuery, GetBudgetByIdResponse>
 {
     private readonly ApplicationContext _context;
     public GetBudgetByIdQueryHandler(ApplicationContext context)
     {
         _context = context;
     }
-    public async Task<Budget> Handle(GetBudgetByIdQuery request, CancellationToken cancellationToken)
+    public async Task<GetBudgetByIdResponse> Handle(GetBudgetByIdQuery request, CancellationToken cancellationToken)
     {
-        var result = await _context.Budgets.SingleAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
-        return new(result);
+        var result = await _context.Budgets.FirstAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+        return new(result!.Id, result.Name);
     }
 }

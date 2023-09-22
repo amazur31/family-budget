@@ -3,11 +3,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Tivix.FamilyBudget.Server.Core.Categories.Commands.CreateCategoryCommand;
-using Tivix.FamilyBudget.Server.Core.Categories.Models;
 
 namespace Tivix.FamilyBudget.Server.API.Endpoints.Categories;
 
-public class Post : EndpointBaseAsync.WithRequest<CreateCategoryCommand>.WithActionResult<Category>
+public class Post : EndpointBaseAsync.WithRequest<CreateCategoryCommand>.WithActionResult<CreateCategoryResponse>
 {
     private readonly IMediator _mediator;
 
@@ -24,7 +23,7 @@ public class Post : EndpointBaseAsync.WithRequest<CreateCategoryCommand>.WithAct
     Tags = new[] { "Categories" })
     ]
 
-    public override async Task<ActionResult<Category>> HandleAsync(CreateCategoryCommand command, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<CreateCategoryResponse>> HandleAsync(CreateCategoryCommand command, CancellationToken cancellationToken = default)
     {
         return Ok(await _mediator.Send(command, cancellationToken));
     }

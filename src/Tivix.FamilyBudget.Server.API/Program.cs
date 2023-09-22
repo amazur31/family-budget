@@ -38,7 +38,11 @@ builder.Services.AddSwaggerGen(c => {
     });
 });
 
+builder.Services.AddControllers();
+
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+builder.Services.AddTransient<UserProviderMiddleware>();
+
 builder.Services.AddCore();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddHealthChecks();
@@ -58,12 +62,13 @@ if (app.Environment.IsDevelopment())
 }
 app.MapHealthChecks("/healthz");
 
-app.UseMiddleware<ExceptionHandlingMiddleware>();
-
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<UserProviderMiddleware>();
 
 app.MapIdentityApi<UserEntity>();
 

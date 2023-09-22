@@ -1,17 +1,13 @@
-﻿using System.Diagnostics;
-using System.Security.Claims;
-using Ardalis.ApiEndpoints;
+﻿using Ardalis.ApiEndpoints;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
-using Tivix.FamilyBudget.Server.Core.Budgets.Models;
 
 namespace Tivix.FamilyBudget.Server.API.Endpoints.Budgets;
 
-public class Post : EndpointBaseAsync.WithRequest<CreateBudgetCommand>.WithActionResult<Budget>
+public class Post : EndpointBaseAsync.WithRequest<CreateBudgetCommand>.WithActionResult<CreateBudgetResponse>
 {
     private readonly IMediator _mediator;
 
@@ -27,9 +23,8 @@ public class Post : EndpointBaseAsync.WithRequest<CreateBudgetCommand>.WithActio
     OperationId = "Budget_Create",
     Tags = new[] { "Budgets" })
 ]
-    public override async Task<ActionResult<Budget>> HandleAsync(CreateBudgetCommand request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<CreateBudgetResponse>> HandleAsync(CreateBudgetCommand request, CancellationToken cancellationToken = default)
     {
-        HttpContext.User.Identity
         return Ok(await _mediator.Send(request, cancellationToken));
     }
 }

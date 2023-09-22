@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -7,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Tivix.FamilyBudget.Server.Infrastructure.Migrations;
 
 /// <inheritdoc />
-public partial class User : Migration
+public partial class Init : Migration
 {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,6 +32,7 @@ public partial class User : Migration
             columns: table => new
             {
                 Id = table.Column<string>(type: "text", nullable: false),
+                BudgetsAccessible = table.Column<List<Guid>>(type: "uuid[]", nullable: true),
                 UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                 NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                 Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -49,19 +51,6 @@ public partial class User : Migration
             constraints: table =>
             {
                 table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-            });
-
-        migrationBuilder.CreateTable(
-            name: "Categories",
-            columns: table => new
-            {
-                Id = table.Column<Guid>(type: "uuid", nullable: false),
-                BudgetId = table.Column<Guid>(type: "uuid", nullable: false),
-                Name = table.Column<string>(type: "text", nullable: false)
-            },
-            constraints: table =>
-            {
-                table.PrimaryKey("PK_Categories", x => x.Id);
             });
 
         migrationBuilder.CreateTable(
@@ -170,6 +159,56 @@ public partial class User : Migration
                     onDelete: ReferentialAction.Cascade);
             });
 
+        migrationBuilder.CreateTable(
+            name: "Budgets",
+            columns: table => new
+            {
+                Id = table.Column<Guid>(type: "uuid", nullable: false),
+                UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                Name = table.Column<string>(type: "text", nullable: false),
+                UserEntityId = table.Column<string>(type: "text", nullable: true)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Budgets", x => x.Id);
+                table.ForeignKey(
+                    name: "FK_Budgets_AspNetUsers_UserEntityId",
+                    column: x => x.UserEntityId,
+                    principalTable: "AspNetUsers",
+                    principalColumn: "Id");
+            });
+
+        migrationBuilder.CreateTable(
+            name: "Categories",
+            columns: table => new
+            {
+                Id = table.Column<Guid>(type: "uuid", nullable: false),
+                BudgetId = table.Column<Guid>(type: "uuid", nullable: false),
+                UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                UserId1 = table.Column<string>(type: "text", nullable: true),
+                Name = table.Column<string>(type: "text", nullable: false)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_Categories", x => x.Id);
+                table.ForeignKey(
+                    name: "FK_Categories_AspNetUsers_UserId1",
+                    column: x => x.UserId1,
+                    principalTable: "AspNetUsers",
+                    principalColumn: "Id");
+                table.ForeignKey(
+                    name: "FK_Categories_Budgets_BudgetId",
+                    column: x => x.BudgetId,
+                    principalTable: "Budgets",
+                    principalColumn: "Id",
+                    onDelete: ReferentialAction.Cascade);
+            });
+
+        migrationBuilder.InsertData(
+            table: "AspNetUsers",
+            columns: new[] { "Id", "AccessFailedCount", "BudgetsAccessible", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+            values: new object[] { "90db1d78-c639-42c1-b6a8-b741975d3322", 0, null, "5bfec93d-a286-4e0e-a79b-f1193a612d14", "example@example.com", true, false, null, "EXAMPLE@EXAMPLE.COM", "EXAMPLE@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ1yKBk/2UNYl6o16aimTV6gUrwQlKHGRcLbO14Oam8e31VG7YxHgEOdWau4AoaXNw==", "1234567890", true, "HE2MFWR5BLKWMUN3KVXTVSMILHRWTQYD", false, "example@example.com" });
+
         migrationBuilder.CreateIndex(
             name: "IX_AspNetRoleClaims_RoleId",
             table: "AspNetRoleClaims",
@@ -206,6 +245,21 @@ public partial class User : Migration
             table: "AspNetUsers",
             column: "NormalizedUserName",
             unique: true);
+
+        migrationBuilder.CreateIndex(
+            name: "IX_Budgets_UserEntityId",
+            table: "Budgets",
+            column: "UserEntityId");
+
+        migrationBuilder.CreateIndex(
+            name: "IX_Categories_BudgetId",
+            table: "Categories",
+            column: "BudgetId");
+
+        migrationBuilder.CreateIndex(
+            name: "IX_Categories_UserId1",
+            table: "Categories",
+            column: "UserId1");
     }
 
     /// <inheritdoc />
@@ -231,6 +285,9 @@ public partial class User : Migration
 
         migrationBuilder.DropTable(
             name: "AspNetRoles");
+
+        migrationBuilder.DropTable(
+            name: "Budgets");
 
         migrationBuilder.DropTable(
             name: "AspNetUsers");

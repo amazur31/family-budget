@@ -2,6 +2,6 @@
 public class CategoryEntity
 {
     public Guid Id { get; set; }
-    public Guid BudgetId { get; set; }
+    public BudgetEntity Budget { get; set; } = null!;
     public string Name { get; set; } = null!;
 }
