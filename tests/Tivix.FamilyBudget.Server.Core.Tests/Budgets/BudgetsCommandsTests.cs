@@ -3,6 +3,7 @@ using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 
+[Collection("BudgetsTests")]
 public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
 {
     ApplicationDataFixture _fixture;
@@ -16,12 +17,12 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
     public async void GetBudgetByIdQuery_ReturnsBudget_ForCorrectQuery()
     {
         Mocks.UserProviderMock.UserEntity.Returns(Mocks.User);
-        var handler = new CreateBudgetCommandHandler(_fixture.BudgetCommands, Mocks.UserProviderMock);
+        var handler = new CreateBudgetCommandHandler(_fixture.BudgetsCommands, Mocks.UserProviderMock);
 
         var result = await handler.Handle(new CreateBudgetCommand("SomeName"), CancellationToken.None);
 
         Assert.NotNull(result);
         Assert.Equal("SomeName", result.Name);
-        Assert.NotNull(_fixture.BudgetCommands.Budgets.Single(p => p.Id == result.Id));
+        Assert.NotNull(_fixture.BudgetsCommands.Budgets.Single(p => p.Id == result.Id));
     }
 }
