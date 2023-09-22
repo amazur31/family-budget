@@ -1,5 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Tivix.FamilyBudget.Server.Core.Categories.Commands.CreateCategoryCommand;
@@ -15,11 +16,11 @@ public class Post : EndpointBaseAsync.WithRequest<CreateCategoryCommand>.WithAct
         _mediator = mediator;
     }
 
-    [HttpPost("/categories")]
+    [HttpPost("/categories"), Authorize]
     [SwaggerOperation(
     Summary = "Creates category",
     Description = "Creates category",
-    OperationId = "Category_Create",
+    OperationId = "Category_Post",
     Tags = new[] { "Categories" })
     ]
 

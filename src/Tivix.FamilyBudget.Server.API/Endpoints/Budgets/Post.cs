@@ -20,7 +20,7 @@ public class Post : EndpointBaseAsync.WithRequest<CreateBudgetCommand>.WithActio
     [SwaggerOperation(
     Summary = "Creates a new Budget",
     Description = "Creates a new Budget",
-    OperationId = "Budget_Create",
+    OperationId = "Budget_Post",
     Tags = new[] { "Budgets" })
 ]
     public override async Task<ActionResult<CreateBudgetResponse>> HandleAsync(CreateBudgetCommand request, CancellationToken cancellationToken = default)

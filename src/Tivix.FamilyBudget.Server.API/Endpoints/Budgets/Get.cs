@@ -1,5 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
@@ -15,7 +16,7 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetBudge
         _mediator = mediator;
     }
 
-    [HttpGet("/budgets/{id}")]
+    [HttpGet("/budgets/{id}"), Authorize]
     [SwaggerOperation(
     Summary = "Gets a Budget",
     Description = "Gets a Budget",

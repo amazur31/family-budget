@@ -1,5 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Tivix.FamilyBudget.Server.Core.Categories.Queries.GetCategoriesByBudgetId;
@@ -15,12 +16,12 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetCateg
         _mediator = mediator;
     }
 
-    [HttpGet("budgets/{budgetId}/categories")]
+    [HttpGet("budgets/{budgetId}/categories"), Authorize]
     [SwaggerOperation(
     Summary = "Gets categories for budget",
     Description = "Gets categories for budget",
     OperationId = "Category_Get",
-    Tags = new[] { "Budgets" })
+    Tags = new[] { "BudgetsCategories" })
     ]
 
     public override async Task<ActionResult<GetCategoriesByBudgetIdResponse>> HandleAsync([FromRoute] Guid budgetId, CancellationToken cancellationToken = default)

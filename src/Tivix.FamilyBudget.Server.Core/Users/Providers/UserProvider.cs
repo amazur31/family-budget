@@ -15,6 +15,7 @@ public class UserProvider : IUserProvider
 
     public async Task SetUserEntity(string userId)
     {
-        UserEntity = await _context.Users.Include(p=>p.Budgets).FirstOrDefaultAsync(x => x.Id == userId);
+        var userGuid = Guid.Parse(userId);
+        UserEntity = await _context.Users.FirstOrDefaultAsync(x => x.Id == userGuid);
     }
 }

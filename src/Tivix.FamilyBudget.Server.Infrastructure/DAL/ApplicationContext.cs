@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Infrastructure.DAL;
-public class ApplicationContext : IdentityDbContext<UserEntity>
+public class ApplicationContext : IdentityDbContext<UserEntity, IdentityRole<Guid>, Guid>
 {
     public ApplicationContext(DbContextOptions options) : base(options)
     {
@@ -17,7 +18,7 @@ public class ApplicationContext : IdentityDbContext<UserEntity>
         modelBuilder.Entity<UserEntity>().HasData(
             new UserEntity
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
                 UserName = "example@example.com",
                 NormalizedEmail = "EXAMPLE@EXAMPLE.COM",
                 NormalizedUserName = "EXAMPLE@EXAMPLE.COM",

@@ -15,7 +15,7 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetCateg
         _mediator = mediator;
     }
 
-    [HttpGet("categories/{budgetId}")]
+    [HttpGet("categories/{budgetId}"), Authorize]
     [SwaggerOperation(
     Summary = "Gets categories for budget",
     Description = "Gets categories for budget",

@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Tivix.FamilyBudget.Server.Infrastructure.Migrations;
 
 /// <inheritdoc />
-public partial class Init : Migration
+public partial class Squash : Migration
 {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ public partial class Init : Migration
             name: "AspNetRoles",
             columns: table => new
             {
-                Id = table.Column<string>(type: "text", nullable: false),
+                Id = table.Column<Guid>(type: "uuid", nullable: false),
                 Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                 NormalizedName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                 ConcurrencyStamp = table.Column<string>(type: "text", nullable: true)
@@ -31,7 +31,7 @@ public partial class Init : Migration
             name: "AspNetUsers",
             columns: table => new
             {
-                Id = table.Column<string>(type: "text", nullable: false),
+                Id = table.Column<Guid>(type: "uuid", nullable: false),
                 BudgetsAccessible = table.Column<List<Guid>>(type: "uuid[]", nullable: true),
                 UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                 NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -59,7 +59,7 @@ public partial class Init : Migration
             {
                 Id = table.Column<int>(type: "integer", nullable: false)
                     .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                RoleId = table.Column<string>(type: "text", nullable: false),
+                RoleId = table.Column<Guid>(type: "uuid", nullable: false),
                 ClaimType = table.Column<string>(type: "text", nullable: true),
                 ClaimValue = table.Column<string>(type: "text", nullable: true)
             },
@@ -80,7 +80,7 @@ public partial class Init : Migration
             {
                 Id = table.Column<int>(type: "integer", nullable: false)
                     .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                UserId = table.Column<string>(type: "text", nullable: false),
+                UserId = table.Column<Guid>(type: "uuid", nullable: false),
                 ClaimType = table.Column<string>(type: "text", nullable: true),
                 ClaimValue = table.Column<string>(type: "text", nullable: true)
             },
@@ -102,7 +102,7 @@ public partial class Init : Migration
                 LoginProvider = table.Column<string>(type: "text", nullable: false),
                 ProviderKey = table.Column<string>(type: "text", nullable: false),
                 ProviderDisplayName = table.Column<string>(type: "text", nullable: true),
-                UserId = table.Column<string>(type: "text", nullable: false)
+                UserId = table.Column<Guid>(type: "uuid", nullable: false)
             },
             constraints: table =>
             {
@@ -119,8 +119,8 @@ public partial class Init : Migration
             name: "AspNetUserRoles",
             columns: table => new
             {
-                UserId = table.Column<string>(type: "text", nullable: false),
-                RoleId = table.Column<string>(type: "text", nullable: false)
+                UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                RoleId = table.Column<Guid>(type: "uuid", nullable: false)
             },
             constraints: table =>
             {
@@ -143,7 +143,7 @@ public partial class Init : Migration
             name: "AspNetUserTokens",
             columns: table => new
             {
-                UserId = table.Column<string>(type: "text", nullable: false),
+                UserId = table.Column<Guid>(type: "uuid", nullable: false),
                 LoginProvider = table.Column<string>(type: "text", nullable: false),
                 Name = table.Column<string>(type: "text", nullable: false),
                 Value = table.Column<string>(type: "text", nullable: true)
@@ -165,17 +165,17 @@ public partial class Init : Migration
             {
                 Id = table.Column<Guid>(type: "uuid", nullable: false),
                 UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                Name = table.Column<string>(type: "text", nullable: false),
-                UserEntityId = table.Column<string>(type: "text", nullable: true)
+                Name = table.Column<string>(type: "text", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_Budgets", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_Budgets_AspNetUsers_UserEntityId",
-                    column: x => x.UserEntityId,
+                    name: "FK_Budgets_AspNetUsers_UserId",
+                    column: x => x.UserId,
                     principalTable: "AspNetUsers",
-                    principalColumn: "Id");
+                    principalColumn: "Id",
+                    onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
@@ -184,18 +184,11 @@ public partial class Init : Migration
             {
                 Id = table.Column<Guid>(type: "uuid", nullable: false),
                 BudgetId = table.Column<Guid>(type: "uuid", nullable: false),
-                UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                UserId1 = table.Column<string>(type: "text", nullable: true),
                 Name = table.Column<string>(type: "text", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_Categories", x => x.Id);
-                table.ForeignKey(
-                    name: "FK_Categories_AspNetUsers_UserId1",
-                    column: x => x.UserId1,
-                    principalTable: "AspNetUsers",
-                    principalColumn: "Id");
                 table.ForeignKey(
                     name: "FK_Categories_Budgets_BudgetId",
                     column: x => x.BudgetId,
@@ -207,7 +200,7 @@ public partial class Init : Migration
         migrationBuilder.InsertData(
             table: "AspNetUsers",
             columns: new[] { "Id", "AccessFailedCount", "BudgetsAccessible", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-            values: new object[] { "90db1d78-c639-42c1-b6a8-b741975d3322", 0, null, "5bfec93d-a286-4e0e-a79b-f1193a612d14", "example@example.com", true, false, null, "EXAMPLE@EXAMPLE.COM", "EXAMPLE@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ1yKBk/2UNYl6o16aimTV6gUrwQlKHGRcLbO14Oam8e31VG7YxHgEOdWau4AoaXNw==", "1234567890", true, "HE2MFWR5BLKWMUN3KVXTVSMILHRWTQYD", false, "example@example.com" });
+            values: new object[] { new Guid("86e5a8bd-df61-4cd4-b7e6-dbfde6580796"), 0, null, "4db03f23-a1c9-4942-9a41-bffd6b3e8258", "example@example.com", true, false, null, "EXAMPLE@EXAMPLE.COM", "EXAMPLE@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ1yKBk/2UNYl6o16aimTV6gUrwQlKHGRcLbO14Oam8e31VG7YxHgEOdWau4AoaXNw==", "1234567890", true, "HE2MFWR5BLKWMUN3KVXTVSMILHRWTQYD", false, "example@example.com" });
 
         migrationBuilder.CreateIndex(
             name: "IX_AspNetRoleClaims_RoleId",
@@ -247,19 +240,14 @@ public partial class Init : Migration
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_Budgets_UserEntityId",
+            name: "IX_Budgets_UserId",
             table: "Budgets",
-            column: "UserEntityId");
+            column: "UserId");
 
         migrationBuilder.CreateIndex(
             name: "IX_Categories_BudgetId",
             table: "Categories",
             column: "BudgetId");
-
-        migrationBuilder.CreateIndex(
-            name: "IX_Categories_UserId1",
-            table: "Categories",
-            column: "UserId1");
     }
 
     /// <inheritdoc />
