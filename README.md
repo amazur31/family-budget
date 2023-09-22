@@ -21,12 +21,16 @@ TIP: If you're new - you can use PgAdmin to connect to Postgres. It's simillar t
 `dotnet user-secrets --project "src\Tivix.FamilyBudget.Server.Api" set "ConnectionStrings:DefaultConnection" "User ID=<USERNAME>;Password=<PASSWORD>;Host=localhost;Port=5432;Database=FamilyBudgetDB;"`
 
 5. Run `update-database`
-6. Shoot off a request at /login for Bearer Token
+
+
+<h1># Authorization </h1>
+1. Shoot off a request at /login for Bearer Token
 Default credentials:
 `email: example@example.com
 pass: Dupa123!`
-7. Authorize in swagger with the bearer token
-1. 
+2. Authorize in swagger with the bearer token
+
+Login request:
 `
 {
   "email": "example@example.com",
