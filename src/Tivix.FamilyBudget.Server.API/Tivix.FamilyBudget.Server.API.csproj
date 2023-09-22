@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Endpoints\Budgets\Shared\" />
     <Folder Include="Endpoints\Budgets\Share\" />
   </ItemGroup>
 
