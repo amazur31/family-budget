@@ -21,5 +21,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <Folder Include="FinancialEntries\Commands\DeleteFinancialEntryCommand\" />
+    <Folder Include="FinancialEntries\Commands\UpdateFinancialEntryCommand\" />
+    <Folder Include="FinancialEntries\Queries\GetFinancialEntriesByCategoryIdQuery\" />
+  </ItemGroup>
 
 </Project>
