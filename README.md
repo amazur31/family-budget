@@ -24,10 +24,14 @@ TIP: If you're new - you can use PgAdmin to connect to Postgres. It's simillar t
 
 
 <h1># Authorization </h1>
-1. Shoot off a request at /login for Bearer Token
+
+1. Shoot off a request at /login for Bearer Token</br>
 Default credentials:
+
+
 `email: example@example.com
 pass: Dupa123!`
+</br>
 2. Authorize in swagger with the bearer token
 
 Login request:
