@@ -32,10 +32,6 @@ Default credentials:
 `email: example@example.com
 pass: Dupa123!`
 </br>
-
-2. Authorize in swagger with the bearer token
-
-Login request:
 `
 {
   "email": "example@example.com",
@@ -44,6 +40,9 @@ Login request:
   "twoFactorRecoveryCode": ""
 }
 `
+</br>
+
+2. Authorize in swagger with the bearer token
 
 <h1># Frequently Asked Questions (FAQ)</h1>
 
