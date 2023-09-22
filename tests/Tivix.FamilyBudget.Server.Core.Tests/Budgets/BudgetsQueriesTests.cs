@@ -14,7 +14,7 @@ public class BudgetsQueriesTests : IClassFixture<ApplicationDataFixture>
     }
 
     [Fact]
-    public async void GetBudgetByIdQueryHandler_GetsBudget_ForCorrectCommand()
+    public async void GetBudgetByIdQueryHandler_GetsBudget_ForCorrectQuery()
     {
         Mocks.UserProviderMock.UserEntity.Returns(Mocks.User);
         var handler = new GetBudgetByIdQueryHandler(_fixture.BudgetsQueries);

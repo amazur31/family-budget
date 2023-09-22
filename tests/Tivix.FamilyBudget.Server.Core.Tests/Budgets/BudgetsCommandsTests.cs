@@ -13,7 +13,7 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
     }
 
     [Fact]
-    public async void GetBudgetByIdQuery_ReturnsBudget_ForCorrectQuery()
+    public async void CreateBudgetCommandHandler_AddsBudget_ForCorrectCommand()
     {
         Mocks.UserProviderMock.UserEntity.Returns(Mocks.User);
         var handler = new CreateBudgetCommandHandler(_fixture.BudgetsCommands, Mocks.UserProviderMock);
