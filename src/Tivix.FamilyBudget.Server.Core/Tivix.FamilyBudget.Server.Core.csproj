@@ -11,7 +11,13 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageReference Include="MediatR" Version="12.1.1" />
   </ItemGroup>
-
+    
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>Tivix.FamilyBudget.Server.Core.Tests</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+    
   <ItemGroup>
     <ProjectReference Include="..\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj" />
   </ItemGroup>
