@@ -19,7 +19,7 @@ internal class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComm
         var budget = _context.Budgets.FirstOrDefault(p => p.Id == request.BudgetId);
         var categoryEntity = new CategoryEntity() { Budget = budget!, Id = Guid.NewGuid(), Name = request.Name };
         var result = await _context.Categories.AddAsync(categoryEntity);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return new(result.Entity.Id, result.Entity.Name);
     }

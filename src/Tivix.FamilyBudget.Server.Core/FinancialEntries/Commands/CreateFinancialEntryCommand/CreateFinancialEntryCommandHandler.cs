@@ -25,7 +25,7 @@ internal class CreateFinancialEntryCommandHandler : IRequestHandler<CreateFinanc
             Name = request.Name
         });
 
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return new(budget.Entity.Id, budget.Entity.Name, budget.Entity.IsExpense, category.Id);
     }
