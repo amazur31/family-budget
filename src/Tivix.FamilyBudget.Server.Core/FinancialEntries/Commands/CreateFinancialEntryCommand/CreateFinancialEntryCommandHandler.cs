@@ -3,8 +3,8 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Categories.Commands.CreateCategoryCommand;
-public record CreateFinancialEntryCommand(string Name, bool IsExpense) : IRequest<CreateFinancialEntryResponse>;
-public record CreateFinancialEntryResponse(Guid Id, string Name, bool IsExpense);
+public record CreateFinancialEntryCommand(string Name, bool IsExpense, Guid CategoryId) : IRequest<CreateFinancialEntryResponse>;
+public record CreateFinancialEntryResponse(Guid Id, string Name, bool IsExpense, Guid CategoryId);
 
 internal class CreateFinancialEntryCommandHandler : IRequestHandler<CreateFinancialEntryCommand, CreateFinancialEntryResponse>
 {
@@ -16,11 +16,17 @@ internal class CreateFinancialEntryCommandHandler : IRequestHandler<CreateFinanc
 
     public async Task<CreateFinancialEntryResponse> Handle(CreateFinancialEntryCommand request, CancellationToken cancellationToken)
     {
-        var budget = _context.Budgets.FirstOrDefault(p => p.Id == request.BudgetId);
-        var categoryEntity = new CategoryEntity() { Budget = budget!, Id = Guid.NewGuid(), Name = request.Name };
-        var result = await _context.Categories.AddAsync(categoryEntity);
-        _context.SaveChanges();
+        var category = _context.Categories.First(p=>p.Id == request.CategoryId);
+        var budget = _context.FinancialEntries.Add(new FinancialEntryEntity()
+        {
+            Id = new Guid(),
+            Category = category,
+            IsExpense = request.IsExpense,
+            Name = request.Name
+        });
 
-        return new(result.Entity.Id, result.Entity.Name);
+        await _context.SaveChangesAsync();
+
+        return new(budget.Entity.Id, budget.Entity.Name, budget.Entity.IsExpense, category.Id);
     }
 }

@@ -9,7 +9,7 @@ public class ApplicationContext : IdentityDbContext<UserEntity, IdentityRole<Gui
     public ApplicationContext(DbContextOptions options) : base(options)
     {
     }
-
+    public DbSet<FinancialEntryEntity> FinancialEntries { get; set; }
     public DbSet<BudgetEntity> Budgets { get; set; }
     public DbSet<CategoryEntity> Categories { get; set; }
 
