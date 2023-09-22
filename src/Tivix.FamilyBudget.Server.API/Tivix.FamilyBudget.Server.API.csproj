@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Tivix.FamilyBudget.Server.Infrastructure\Tivix.FamilyBudget.Server.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Endpoints\Budgets\Share\" />
+  </ItemGroup>
+
 </Project>

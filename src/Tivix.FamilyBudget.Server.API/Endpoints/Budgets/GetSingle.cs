@@ -7,11 +7,11 @@ using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
 
 namespace Tivix.FamilyBudget.Server.API.Endpoints.Budgets;
 
-public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetBudgetByIdResponse>
+public class GetSingle : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetBudgetByIdResponse>
 {
     private readonly IMediator _mediator;
 
-    public Get(IMediator mediator)
+    public GetSingle(IMediator mediator)
     {
         _mediator = mediator;
     }
