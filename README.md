@@ -32,6 +32,7 @@ Default credentials:
 `email: example@example.com
 pass: Dupa123!`
 </br>
+
 2. Authorize in swagger with the bearer token
 
 Login request:
