@@ -13,7 +13,7 @@ public record CreateCategoryPostRequest
     [FromRoute]
     public Guid budgetId { get; set; }
     [FromBody]
-    public NamePost Name { get; set; }
+    public NamePost Name { get; set; } = null!;
 
     public record NamePost(string Name);
 }
