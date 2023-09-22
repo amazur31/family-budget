@@ -31,6 +31,8 @@ Default credentials:
 
 `email: example@example.com
 pass: Dupa123!`
+<br>
+Login request:
 </br>
 `
 {
