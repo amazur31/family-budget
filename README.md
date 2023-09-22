@@ -100,6 +100,15 @@ useful test helpers like InMemoryDb.</p>
 I wouldn't do it in Production environment - but since it's an app where I can try out fancy things
 then so be it.</p>
 
+<h2>Why did you use NSubstitute?</h2>
+<p>Recent events regarding Moq scandal made me use it.</p>
+
+<h2>Why so many models?</h2>
+<p>Honestly, I just wanted to try a different way of working with models. Typically you'd have in a case of such application three or four models.
+Budget, Category, FinancialSettlement, User - and with the help of mapping tools you'd automatically map it, or you'd go OOP style and have methods that
+map it in the models themselves. Route I've went - every command has a seperate return model, might allow for better control over returned data.
+Also, it makes it so everything is neatly contained - lately Vertical Architecture grew on me.</p>
+
 <footer>
     <p>&copy; 2023 aezakmi software</p>
 </footer>
