@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Core.Common.Pagination;
 using Tivix.FamilyBudget.Server.Core.Users.Providers;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
-using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgets;
 public record GetBudgetsQuery(Pagination? Pagination) : IRequest<GetBudgetsQueryResponse>;
