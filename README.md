@@ -7,6 +7,10 @@ This repository contains the Family Budget application, which is part of the Tiv
 `docker build -f src\Tivix.FamilyBudget.Server.API\Dockerfile -t familybudget .`
 `docker run --rm -it -p 8000:8080 familybudget`
 
+Navigate to `http://localhost:8000/healthz`
+You can run migrations with [Migrate.exe](https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/migrations/migrate-exe):
+`docker exec familybudget Migration.exe`
+
 ## Local Setup
 
 ### Requirements
