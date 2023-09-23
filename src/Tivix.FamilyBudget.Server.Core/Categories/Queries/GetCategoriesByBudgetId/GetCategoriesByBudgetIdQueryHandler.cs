@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Tivix.FamilyBudget.Server.Core.Categories.Commands.CreateCategoryCommand;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
 namespace Tivix.FamilyBudget.Server.Core.Categories.Queries.GetCategoriesByBudgetId;
@@ -18,5 +20,13 @@ internal class GetCategoriesByBudgetIdQueryHandler : IRequestHandler<GetCategori
     {
         var result = _context.Categories.Where(p => p.Budget.Id == request.BudgetId);
         return await result.Select(p=>new GetCategoriesByBudgetIdResponse(p.Id, p.Name)).ToListAsync(cancellationToken: cancellationToken);
+    }
+}
+
+internal class GetCategoriesByBudgetIdQueryHandlerValidator : AbstractValidator<GetCategoriesByBudgetIdQuery>
+{
+    public GetCategoriesByBudgetIdQueryHandlerValidator()
+    {
+        //TODO: Add Validation
     }
 }

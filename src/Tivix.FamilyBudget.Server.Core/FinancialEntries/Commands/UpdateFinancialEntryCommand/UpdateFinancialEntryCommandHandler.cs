@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
@@ -26,5 +27,13 @@ internal class UpdateFinancialEntryCommandHandler : IRequestHandler<UpdateFinanc
         await _context.SaveChangesAsync(cancellationToken);
 
         return new(entry.Id, entry.Name, entry.IsExpense, category.Id);
+    }
+}
+
+internal class UpdateFinancialEntryCommandHandlerValidator : AbstractValidator<UpdateFinancialEntryCommand>
+{
+    public UpdateFinancialEntryCommandHandlerValidator()
+    {
+        //TODO: Add Validation
     }
 }

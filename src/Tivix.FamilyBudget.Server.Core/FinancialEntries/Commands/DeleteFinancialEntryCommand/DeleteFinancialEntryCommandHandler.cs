@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
@@ -19,5 +20,13 @@ internal class DeleteFinancialEntryCommandHandler : IRequestHandler<DeleteFinanc
         var entry = await _context.FinancialEntries.SingleAsync(p =>p.Id == request.Id, cancellationToken: cancellationToken);
         _context.FinancialEntries.Remove(entry);
         await _context.SaveChangesAsync(cancellationToken);
+    }
+}
+
+internal class DeleteFinancialEntryCommandHandlerValidator : AbstractValidator<DeleteFinancialEntryCommand>
+{
+    public DeleteFinancialEntryCommandHandlerValidator()
+    {
+        //TODO: Add Validation
     }
 }

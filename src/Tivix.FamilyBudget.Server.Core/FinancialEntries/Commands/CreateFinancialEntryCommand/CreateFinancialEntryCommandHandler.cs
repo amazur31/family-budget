@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Tivix.FamilyBudget.Server.Core.Categories.Queries.GetCategoriesByBudgetId;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
@@ -30,5 +32,13 @@ internal class CreateFinancialEntryCommandHandler : IRequestHandler<CreateFinanc
         await _context.SaveChangesAsync(cancellationToken);
 
         return new(budget.Entity.Id, budget.Entity.Name, budget.Entity.IsExpense, category.Id);
+    }
+}
+
+internal class CreateFinancialEntryCommandHandlerValidator : AbstractValidator<CreateFinancialEntryCommand>
+{
+    public CreateFinancialEntryCommandHandlerValidator()
+    {
+        //TODO: Add Validation
     }
 }
