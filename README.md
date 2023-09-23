@@ -119,3 +119,15 @@ The use of NSubstitute over other mocking libraries was influenced by recent eve
 ### Why so many models?
 
 This project utilizes multiple models for each command, allowing for better control over returned data. It follows a vertical architecture approach to neatly organize and manage data models.
+
+### Learnings, and what I'd do differently?
+
+To start off, I want to acknowledge that this application is primarily intended for recruitment purposes, and the objective is to present my skills in the best light possible. However, rather than adhering to my usual routine, I made the deliberate choice to experiment with some recent software techniques that have captured my attention. Specifically, I delved into the world of the Resource-Endpoint Pattern (REPR) and integrated .NET 8 Identity.
+
+The REPR pattern excels in defining how endpoints function within an application, although it may not be the most suitable approach for managing data or resources associated with those endpoints. It is crucial to ensure that this pattern aligns seamlessly with the application's requirements.
+
+Furthermore, I explored the Ardalis [ApiEndpoints](https://github.com/ardalis/ApiEndpoints) library, which, while commendable, exhibits certain limitations, such as its inability to handle multiple data bindings.
+
+In retrospect, I believe I might have pursued an alternative strategy for handling requests and responses. While my chosen approach provided enhanced control over the data returned, it could potentially result in maintenance challenges, particularly when introducing new parameters to a data model. A more pragmatic design approach might involve the creation of a generic mapper, streamlining the integration of MediatR Commands and Queries within endpoints. Presently, although MediatR integration is feasible, it is not always straightforward, and I occasionally found it necessary to create new data structures solely to specify how data should be mapped.
+
+In summary, I derived significant value from this experience, and I eagerly welcome the opportunity to engage in similar endeavors in the future. Nonetheless, I intend to explore alternative methodologies. For instance, I am inclined to investigate the use of MinimalAPI with MediatR integration, as it appears to offer a simpler and more effective approach, as demonstrated by Nick Chapsas in his video [here](https://youtu.be/euUg_IHo7-s?si=7yKLr1n5KpS7FeU3).
