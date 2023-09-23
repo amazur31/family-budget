@@ -5,4 +5,5 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 [assembly: SuppressMessage("Usage", "CA2211:Non-constant fields should not be visible", Justification = "Not needed for Tests", Scope = "member", Target = "~F:Tivix.FamilyBudget.Server.Core.Tests.Mocks.UserProviderMock")]

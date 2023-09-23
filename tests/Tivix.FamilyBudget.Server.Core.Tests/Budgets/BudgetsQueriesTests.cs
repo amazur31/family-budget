@@ -16,15 +16,16 @@ public class BudgetsQueriesTests : IClassFixture<ApplicationDataFixture>
     [Fact]
     public async void GetBudgetByIdQueryHandler_GetsBudget_ForCorrectQuery()
     {
+        using var context = _fixture.Context;
         Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
-        var handler = new GetBudgetByIdQueryHandler(_fixture.BudgetsQueries);
+        var handler = new GetBudgetByIdQueryHandler(context);
         var budget = new Faker<BudgetEntity>().StrictMode(true)
             .RuleFor(p => p.Id, Guid.NewGuid())
             .RuleFor(p => p.Name, f => f.Name.Random.Words())
             .RuleFor(p => p.User, Mocks.UserEntity)
             .Generate();
-        _fixture.BudgetsQueries.Budgets.Add(budget);
-        _fixture.BudgetsQueries.SaveChanges();
+        context.Budgets.Add(budget);
+        context.SaveChanges();
 
         var result = await handler.Handle(new GetBudgetByIdQuery(budget.Id), CancellationToken.None);
 

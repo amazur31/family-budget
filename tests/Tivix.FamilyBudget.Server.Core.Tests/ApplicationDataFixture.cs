@@ -4,33 +4,17 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 namespace Tivix.FamilyBudget.Server.Core.Tests;
 public class ApplicationDataFixture : IDisposable
 {
-    public ApplicationContext BudgetsCommands { get; private set; }
-    public ApplicationContext BudgetsQueries { get; private set; }
-    public ApplicationContext CategoriesCommands { get; private set; }
-    public ApplicationContext CategoriesQueries { get; private set; }
-    public ApplicationContext FinancialEntriesCommands { get; private set; }
-    public ApplicationContext FinancialEntriesQueries { get; private set; }
+    public ApplicationContext Context { get { return GetApplicationContext(Guid.NewGuid().ToString()); } }
 
-
-    public ApplicationDataFixture()
+    static ApplicationContext GetApplicationContext(string dbName)
     {
-        BudgetsCommands = GetApplicationContext(nameof(BudgetsCommands));
-        BudgetsQueries = GetApplicationContext(nameof(BudgetsQueries));
-        CategoriesCommands = GetApplicationContext(nameof(CategoriesCommands));
-        CategoriesQueries = GetApplicationContext(nameof(CategoriesQueries));
-        FinancialEntriesCommands = GetApplicationContext(nameof(FinancialEntriesCommands));
-        FinancialEntriesQueries = GetApplicationContext(nameof(FinancialEntriesQueries));
-
-        static ApplicationContext GetApplicationContext(string dbName)
-        {
-            return new ApplicationContext(new DbContextOptionsBuilder<ApplicationContext>()
-            .UseInMemoryDatabase(dbName)
-            .Options);
-        }
+        return new ApplicationContext(new DbContextOptionsBuilder<ApplicationContext>()
+        .UseInMemoryDatabase(dbName)
+        .Options);
     }
 
     public void Dispose()
     {
-        GC.SuppressFinalize(this);
+        Context.Dispose();
     }
 }

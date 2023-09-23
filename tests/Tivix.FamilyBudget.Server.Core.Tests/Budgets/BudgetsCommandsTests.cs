@@ -15,13 +15,14 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
     [Fact]
     public async void CreateBudgetCommandHandler_AddsBudget_ForCorrectCommand()
     {
+        using var context = _fixture.Context;
         Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
-        var handler = new CreateBudgetCommandHandler(_fixture.BudgetsCommands, Mocks.UserProviderMock);
+        var handler = new CreateBudgetCommandHandler(context, Mocks.UserProviderMock);
 
         var result = await handler.Handle(new CreateBudgetCommand("SomeName"), CancellationToken.None);
 
         Assert.NotNull(result);
         Assert.Equal("SomeName", result.Name);
-        Assert.NotNull(_fixture.BudgetsCommands.Budgets.Single(p => p.Id == result.Id));
+        Assert.NotNull(context.Budgets.Single(p => p.Id == result.Id));
     }
 }

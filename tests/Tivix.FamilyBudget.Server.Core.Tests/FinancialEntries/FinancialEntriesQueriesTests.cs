@@ -15,10 +15,11 @@ public class FinancialEntriesQueriesTests : IClassFixture<ApplicationDataFixture
     [Fact]
     public async void GetFinancialEntriesByCategoryIdQueryHandler_GetsFinancialEntries_ForCorrectQuery()
     {
-        var handler = new GetFinancialEntriesByCategoryIdQueryHandler(_fixture.FinancialEntriesQueries);
-        _fixture.FinancialEntriesQueries.Categories.Add(Mocks.CategoryEntity);
-        _fixture.FinancialEntriesQueries.FinancialEntries.Add(Mocks.FinancialEntryEntity);
-        _fixture.FinancialEntriesQueries.SaveChanges();
+        using var context = _fixture.Context;
+        var handler = new GetFinancialEntriesByCategoryIdQueryHandler(context);
+        context.Categories.Add(Mocks.CategoryEntity);
+        context.FinancialEntries.Add(Mocks.FinancialEntryEntity);
+        context.SaveChanges();
 
         var result = await handler.Handle(new GetFinancialEntriesByCategoryIdQuery(Mocks.CategoryGuid), CancellationToken.None);
 
