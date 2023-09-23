@@ -1,6 +1,6 @@
 ﻿namespace Tivix.FamilyBudget.Server.Core.Tests.Categories;
 
-[Collection("CategoriesCommandsTests")]
+[Collection("CategoriesTests")]
 internal class CategoriesCommandsTests : IClassFixture<ApplicationDataFixture>
 {
     private readonly ApplicationDataFixture _fixture;
