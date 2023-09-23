@@ -19,8 +19,8 @@ public class Get : EndpointBaseAsync.WithRequest<GetFinancialEntriesByCategoryId
     [SwaggerOperation(
     Summary = "Gets financial entries for category",
     Description = "Gets financial entries for category",
-    OperationId = "CategoriesFinancialEntries_Get",
-    Tags = new[] { "CategoriesFinancialEntries" })
+    OperationId = "Categories/financial-entries_Get",
+    Tags = new[] { "Categories" })
     ]
 
     public override async Task<ActionResult<GetFinancialEntriesByCategoryIdResponse>> HandleAsync([FromRoute] GetFinancialEntriesByCategoryIdQuery request, CancellationToken cancellationToken = default)

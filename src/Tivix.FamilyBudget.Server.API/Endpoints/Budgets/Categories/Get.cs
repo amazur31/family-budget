@@ -20,8 +20,8 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetCateg
     [SwaggerOperation(
     Summary = "Gets categories for budget",
     Description = "Gets categories for budget",
-    OperationId = "Category_Get",
-    Tags = new[] { "BudgetsCategories" })
+    OperationId = "Budgets/categories_Get",
+    Tags = new[] { "Budgets" })
     ]
 
     public override async Task<ActionResult<GetCategoriesByBudgetIdResponse>> HandleAsync([FromRoute] Guid budgetId, CancellationToken cancellationToken = default)

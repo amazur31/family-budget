@@ -31,8 +31,8 @@ public class Post : EndpointBaseAsync.WithRequest<CreateCategoryPostRequest>.Wit
     [SwaggerOperation(
     Summary = "Creates category",
     Description = "Creates category",
-    OperationId = "Category_Post",
-    Tags = new[] { "BudgetsCategories" })
+    OperationId = "Budgets/categories_Post",
+    Tags = new[] { "Budgets" })
 ]
     public override async Task<ActionResult<CreateCategoryResponse>> HandleAsync([FromRoute][FromBody] CreateCategoryPostRequest request, CancellationToken cancellationToken = default)
     {
