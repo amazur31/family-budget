@@ -4,7 +4,8 @@ This repository contains the Family Budget application, which is part of the Tiv
 
 ## Docker Setup
 
-`docker build -f src\Tivix.FamilyBudget.Server.API -t familybudget .`
+`docker build -f src\Tivix.FamilyBudget.Server.API\Dockerfile -t familybudget .`
+`docker run --rm -it -p 8000:8080 familybudget`
 
 ## Local Setup
 
@@ -19,8 +20,6 @@ This repository contains the Family Budget application, which is part of the Tiv
 1. Connect to the PostgreSQL database.
 
 2. Create a database named "FamilyBudgetDB".
-
-   TIP: If you're new to PostgreSQL, you can use PgAdmin to connect to it, which is similar to SSMS or Azure Data Studio.
 
 3. Run the following command in Visual Studio to initialize user secrets for the project:
 

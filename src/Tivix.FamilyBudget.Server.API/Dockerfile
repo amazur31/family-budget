@@ -6,8 +6,6 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-ENV ASPNETCORE_ENVIRONMENT=Development
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["src/Tivix.FamilyBudget.Server.API/Tivix.FamilyBudget.Server.API.csproj", "src/Tivix.FamilyBudget.Server.API/"]
