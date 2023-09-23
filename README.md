@@ -19,7 +19,6 @@ Postgre 15.4 or higher `https://www.postgresql.org/download/`
 C# 11
 .NET 8 https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 
-Step by step:
 1. Connect to Database
 2. Run `Create database FamilyBudgetDB`
 TIP: If you're new - you can use PgAdmin to connect to Postgres. It's simillar to SSMS or Azure Data in that regard.
