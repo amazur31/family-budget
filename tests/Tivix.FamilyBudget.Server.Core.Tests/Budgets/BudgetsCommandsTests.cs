@@ -8,19 +8,12 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 
 [Collection("BudgetsTests")]
-public class BudgetsCommandsTests : IClassFixture<BudgetsCommandsDataFixture>
+public class BudgetsCommandsTests
 {
-    private readonly BudgetsCommandsDataFixture _fixture;
-
-    public BudgetsCommandsTests(BudgetsCommandsDataFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
     [Fact]
     public async void CreateBudgetCommandHandler_AddsBudget_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             var handler = new CreateBudgetCommandHandler(context, Mocks.UserProviderMock);
@@ -36,7 +29,7 @@ public class BudgetsCommandsTests : IClassFixture<BudgetsCommandsDataFixture>
     [Fact]
     public async void UpdateBudgetCommandHandler_UpdatesBudget_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             context.Budgets.Add(Mocks.BudgetEntity);
@@ -54,7 +47,7 @@ public class BudgetsCommandsTests : IClassFixture<BudgetsCommandsDataFixture>
     [Fact]
     public async void DeleteBudgetCommandHandler_DeletesBudget_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             context.Budgets.Add(Mocks.BudgetEntity);
@@ -70,7 +63,7 @@ public class BudgetsCommandsTests : IClassFixture<BudgetsCommandsDataFixture>
     [Fact]
     public async void ShareBudgetCommandHandler_SharesBudget_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             var handler = new ShareBudgetCommandHandler(context);
             var userWithAccess = new UserEntity() { Id = Guid.NewGuid() };
@@ -89,7 +82,7 @@ public class BudgetsCommandsTests : IClassFixture<BudgetsCommandsDataFixture>
     [Fact]
     public async void UnshareBudgetCommandHandler_UnsharesBudget_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             var user = new UserEntity() { Id = Guid.NewGuid(), BudgetsAccessible = new List<Guid>() { Mocks.BudgetGuid } };
             Mocks.UserProviderMock.UserEntity.Returns(user);

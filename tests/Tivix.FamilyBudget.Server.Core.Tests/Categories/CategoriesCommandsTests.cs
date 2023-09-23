@@ -5,19 +5,12 @@ using Tivix.FamilyBudget.Server.Core.Categories.Commands.UpdateCategoryCommand;
 namespace Tivix.FamilyBudget.Server.Core.Tests.Categories;
 
 [Collection("CategoriesTests")]
-public class CategoriesCommandsTests : IClassFixture<CategoriesCommandsDataFixture>
+public class CategoriesCommandsTests
 {
-    private readonly CategoriesCommandsDataFixture _fixture;
-
-    public CategoriesCommandsTests(CategoriesCommandsDataFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
     [Fact]
     public async void CreateCategoriesCommandHandler_AddsCategory_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             context.Budgets.Add(Mocks.BudgetEntity);
@@ -34,7 +27,7 @@ public class CategoriesCommandsTests : IClassFixture<CategoriesCommandsDataFixtu
     [Fact]
     public async void UpdateCategoriesCommandHandler_UpdatesCategory_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             context.Categories.Add(Mocks.CategoryEntity);
@@ -52,7 +45,7 @@ public class CategoriesCommandsTests : IClassFixture<CategoriesCommandsDataFixtu
     [Fact]
     public async void DeleteCategoriesCommandHandler_DeletesCategory_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             context.Categories.Add(Mocks.CategoryEntity);

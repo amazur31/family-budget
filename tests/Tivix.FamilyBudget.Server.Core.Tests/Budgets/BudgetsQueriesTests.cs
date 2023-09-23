@@ -5,19 +5,12 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 
 [Collection("BudgetsTests")]
-public class BudgetsQueriesTests : IClassFixture<BudgetsQueriesDataFixture>
+public class BudgetsQueriesTests
 {
-    readonly BudgetsQueriesDataFixture _fixture;
-
-    public BudgetsQueriesTests(BudgetsQueriesDataFixture fixture)
-    {
-        _fixture = fixture;
-    }
-
     [Fact]
     public async void GetBudgetByIdQueryHandler_GetsBudget_ForCorrectQuery()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             var handler = new GetBudgetByIdQueryHandler(context);
@@ -34,7 +27,7 @@ public class BudgetsQueriesTests : IClassFixture<BudgetsQueriesDataFixture>
     [Fact]
     public async void GetSharedBudgetsQuery_GetsBudget_ForCorrectQuery()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             var user = new UserEntity() { Id = Guid.NewGuid(), BudgetsAccessible = new List<Guid>() { Mocks.BudgetGuid } };
             Mocks.UserProviderMock.UserEntity.Returns(user);

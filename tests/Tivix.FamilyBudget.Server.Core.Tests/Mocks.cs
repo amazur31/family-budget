@@ -1,4 +1,6 @@
-﻿using Tivix.FamilyBudget.Server.Core.Users.Providers;
+﻿using Microsoft.EntityFrameworkCore;
+using Tivix.FamilyBudget.Server.Core.Users.Providers;
+using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests;
@@ -33,4 +35,15 @@ public static class Mocks
     };
 
     public static IUserProvider UserProviderMock = Substitute.For<IUserProvider>();
+
+    public static ApplicationContext GetApplicationContext()
+    {
+        return GetApplicationContext(Guid.NewGuid().ToString());
+    }
+    public static ApplicationContext GetApplicationContext(string dbName)
+    {
+        return new ApplicationContext(new DbContextOptionsBuilder<ApplicationContext>()
+        .UseInMemoryDatabase(dbName)
+        .Options);
+    }
 }

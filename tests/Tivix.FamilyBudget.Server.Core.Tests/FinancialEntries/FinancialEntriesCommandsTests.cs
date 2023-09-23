@@ -6,51 +6,49 @@ using Tivix.FamilyBudget.Server.Core.Tests.Categories;
 namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 
 [Collection("FinancialEntriesTests")]
-public class FinancialEntriesCommandsTests : IClassFixture<FinancialEntriesCommandsDataFixture>
+public class FinancialEntriesCommandsTests
 {
-    readonly FinancialEntriesCommandsDataFixture _fixture;
-
-    public FinancialEntriesCommandsTests(FinancialEntriesCommandsDataFixture fixture)
-    {
-        _fixture = fixture;
-    }
 
     [Fact]
     public async void CreateFinancialEntryCommandHandler_AddsFinancialEntry_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
-        Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
-        var handler = new CreateFinancialEntryCommandHandler(context);
-        context.Categories.Add(Mocks.CategoryEntity);
-        context.SaveChanges();
+        using var context = Mocks.GetApplicationContext();
+        {
+            Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
+            var handler = new CreateFinancialEntryCommandHandler(context);
+            context.Categories.Add(Mocks.CategoryEntity);
+            context.SaveChanges();
 
-        var result = await handler.Handle(new CreateFinancialEntryCommand("SomeName", true, Mocks.CategoryGuid), CancellationToken.None);
+            var result = await handler.Handle(new CreateFinancialEntryCommand("SomeName", true, Mocks.CategoryGuid), CancellationToken.None);
 
-        Assert.NotNull(result);
-        Assert.Equal("SomeName", result.Name);
-        Assert.NotNull(context.FinancialEntries.Single(p => p.Id == result.Id));
+            Assert.NotNull(result);
+            Assert.Equal("SomeName", result.Name);
+            Assert.NotNull(context.FinancialEntries.Single(p => p.Id == result.Id));
+        }
     }
 
     [Fact]
     public async void DeleteFinancialEntryCommandHandler_DeletesFinancialEntry_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
-        Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
-        var handler = new DeleteFinancialEntryCommandHandler(context);
-        context.FinancialEntries.Add(Mocks.FinancialEntryEntity);
-        context.SaveChanges();
+        using var context = Mocks.GetApplicationContext();
+        {
+            Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
+            var handler = new DeleteFinancialEntryCommandHandler(context);
+            context.FinancialEntries.Add(Mocks.FinancialEntryEntity);
+            context.SaveChanges();
 
-        Assert.NotNull(context.FinancialEntries.SingleOrDefault(p => p.Id == Mocks.FinancialEntryGuid));
+            Assert.NotNull(context.FinancialEntries.SingleOrDefault(p => p.Id == Mocks.FinancialEntryGuid));
 
-        await handler.Handle(new DeleteFinancialEntryCommand(Mocks.FinancialEntryGuid), CancellationToken.None);
+            await handler.Handle(new DeleteFinancialEntryCommand(Mocks.FinancialEntryGuid), CancellationToken.None);
 
-        Assert.Null(context.FinancialEntries.SingleOrDefault(p => p.Id == Mocks.FinancialEntryGuid));
+            Assert.Null(context.FinancialEntries.SingleOrDefault(p => p.Id == Mocks.FinancialEntryGuid));
+        }
     }
 
     [Fact]
     public async void UpdateFinancialEntryCommandHandler_UpdatesFinancialEntry_ForCorrectCommand()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             var handler = new UpdateFinancialEntryCommandHandler(context);

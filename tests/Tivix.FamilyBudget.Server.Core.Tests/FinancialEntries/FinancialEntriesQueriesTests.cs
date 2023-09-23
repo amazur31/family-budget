@@ -4,19 +4,13 @@ using Tivix.FamilyBudget.Server.Core.Tests.Categories;
 namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 
 [Collection("FinancialEntriesTests")]
-public class FinancialEntriesQueriesTests : IClassFixture<FinancialEntriesQueriesDataFixture>
+public class FinancialEntriesQueriesTests
 {
-    private readonly FinancialEntriesQueriesDataFixture _fixture;
-
-    public FinancialEntriesQueriesTests(FinancialEntriesQueriesDataFixture fixture)
-    {
-        _fixture = fixture;
-    }
 
     [Fact]
     public async void GetFinancialEntriesByCategoryIdQueryHandler_GetsFinancialEntries_ForCorrectQuery()
     {
-        using var context = _fixture.Context;
+        using var context = Mocks.GetApplicationContext();
         {
             var handler = new GetFinancialEntriesByCategoryIdQueryHandler(context);
             context.Categories.Add(Mocks.CategoryEntity);
