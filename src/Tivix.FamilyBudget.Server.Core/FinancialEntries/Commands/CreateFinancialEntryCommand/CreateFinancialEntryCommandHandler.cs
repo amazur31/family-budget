@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
@@ -9,7 +10,7 @@ public record CreateFinancialEntryResponse(Guid Id, string Name, bool IsExpense,
 
 internal class CreateFinancialEntryCommandHandler : IRequestHandler<CreateFinancialEntryCommand, CreateFinancialEntryResponse>
 {
-    ApplicationContext _context;
+    readonly ApplicationContext _context;
     public CreateFinancialEntryCommandHandler(ApplicationContext context)
     {
         _context = context;
@@ -17,14 +18,14 @@ internal class CreateFinancialEntryCommandHandler : IRequestHandler<CreateFinanc
 
     public async Task<CreateFinancialEntryResponse> Handle(CreateFinancialEntryCommand request, CancellationToken cancellationToken)
     {
-        var category = _context.Categories.First(p=>p.Id == request.CategoryId);
-        var budget = _context.FinancialEntries.Add(new FinancialEntryEntity()
+        var category = await _context.Categories.FirstAsync(p =>p.Id == request.CategoryId, cancellationToken: cancellationToken);
+        var budget = await _context.FinancialEntries.AddAsync(new FinancialEntryEntity()
         {
             Id = new Guid(),
             Category = category,
             IsExpense = request.IsExpense,
             Name = request.Name
-        });
+        }, cancellationToken);
 
         await _context.SaveChangesAsync(cancellationToken);
 

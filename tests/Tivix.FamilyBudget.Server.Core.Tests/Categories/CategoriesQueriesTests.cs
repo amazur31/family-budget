@@ -3,7 +3,7 @@
 [Collection("CategoriesTests")]
 internal class CategoriesQueriesTests : IClassFixture<ApplicationDataFixture>
 {
-    ApplicationDataFixture _fixture;
+    private readonly ApplicationDataFixture _fixture;
 
     public CategoriesQueriesTests(ApplicationDataFixture fixture)
     {

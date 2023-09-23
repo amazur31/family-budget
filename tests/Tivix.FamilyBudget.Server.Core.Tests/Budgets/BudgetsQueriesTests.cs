@@ -6,7 +6,7 @@ namespace Tivix.FamilyBudget.Server.Core.Tests;
 [Collection("BudgetsTests")]
 public class BudgetsQueriesTests : IClassFixture<ApplicationDataFixture>
 {
-    ApplicationDataFixture _fixture;
+    readonly ApplicationDataFixture _fixture;
 
     public BudgetsQueriesTests(ApplicationDataFixture fixture)
     {

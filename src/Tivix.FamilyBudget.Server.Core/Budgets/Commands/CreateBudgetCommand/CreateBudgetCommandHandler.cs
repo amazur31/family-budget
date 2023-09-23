@@ -12,8 +12,8 @@ public record CreateBudgetResponse(Guid Id, string Name);
 
 internal class CreateBudgetCommandHandler : IRequestHandler<CreateBudgetCommand, CreateBudgetResponse>
 {
-    ApplicationContext _context;
-    IUserProvider _userProvider;
+    readonly ApplicationContext _context;
+    readonly IUserProvider _userProvider;
     public CreateBudgetCommandHandler(ApplicationContext context, IUserProvider userProvider)
     {
         _context = context;
@@ -28,7 +28,7 @@ internal class CreateBudgetCommandHandler : IRequestHandler<CreateBudgetCommand,
 
         var result = await _context.Budgets.AddAsync(budget, cancellationToken);
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync(cancellationToken);
 
         return new(result.Entity.Id, result.Entity.Name);
     }

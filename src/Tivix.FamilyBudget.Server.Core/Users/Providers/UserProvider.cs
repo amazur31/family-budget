@@ -5,7 +5,7 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 namespace Tivix.FamilyBudget.Server.Core.Users.Providers;
 public class UserProvider : IUserProvider
 {
-    ApplicationContext _context;
+    readonly ApplicationContext _context;
     public UserProvider(ApplicationContext context)
     {
         _context = context;

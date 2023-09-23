@@ -1,13 +1,11 @@
-﻿using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
-using Tivix.FamilyBudget.Server.Core.FinancialEntries.Queries.GetFinancialEntriesByCategoryIdQuery;
-using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
+﻿using Tivix.FamilyBudget.Server.Core.FinancialEntries.Queries.GetFinancialEntriesByCategoryIdQuery;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 
 [Collection("FinancialEntriesTests")]
 public class FinancialEntriesQueriesTests : IClassFixture<ApplicationDataFixture>
 {
-    ApplicationDataFixture _fixture;
+    private readonly ApplicationDataFixture _fixture;
 
     public FinancialEntriesQueriesTests(ApplicationDataFixture fixture)
     {

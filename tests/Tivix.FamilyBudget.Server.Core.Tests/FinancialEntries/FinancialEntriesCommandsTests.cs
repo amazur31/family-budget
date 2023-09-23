@@ -7,7 +7,7 @@ namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 [Collection("FinancialEntriesTests")]
 public class FinancialEntriesCommandsTests : IClassFixture<ApplicationDataFixture>
 {
-    ApplicationDataFixture _fixture;
+    readonly ApplicationDataFixture _fixture;
 
     public FinancialEntriesCommandsTests(ApplicationDataFixture fixture)
     {

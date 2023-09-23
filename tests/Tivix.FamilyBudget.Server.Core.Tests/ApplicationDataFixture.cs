@@ -21,7 +21,7 @@ public class ApplicationDataFixture : IDisposable
         FinancialEntriesCommands = GetApplicationContext(nameof(FinancialEntriesCommands));
         FinancialEntriesQueries = GetApplicationContext(nameof(FinancialEntriesQueries));
 
-        ApplicationContext GetApplicationContext(string dbName)
+        static ApplicationContext GetApplicationContext(string dbName)
         {
             return new ApplicationContext(new DbContextOptionsBuilder<ApplicationContext>()
             .UseInMemoryDatabase(dbName)
@@ -31,6 +31,6 @@ public class ApplicationDataFixture : IDisposable
 
     public void Dispose()
     {
-        BudgetsCommands.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
