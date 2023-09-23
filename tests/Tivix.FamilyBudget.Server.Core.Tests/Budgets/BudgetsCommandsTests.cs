@@ -1,5 +1,7 @@
 ﻿using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
 using Tivix.FamilyBudget.Server.Core.Budgets.Commands.ShareBudgetCommandHandler;
+using Tivix.FamilyBudget.Server.Core.Budgets.Commands.UnshareBudgetCommandHandler;
+using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetSharedBudgets;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
@@ -43,5 +45,23 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
 
         Assert.NotNull(resultUser!.BudgetsAccessible);
         Assert.Equal(Mocks.BudgetEntity.Id, resultUser!.BudgetsAccessible.First());
+    }
+
+    [Fact]
+    public async void UnshareBudgetCommandHandler_UnsharesBudget_ForCorrectCommand()
+    {
+        using var context = _fixture.Context;
+        var user = new UserEntity() { Id = Guid.NewGuid(), BudgetsAccessible = new List<Guid>() { Mocks.BudgetGuid } };
+        Mocks.UserProviderMock.UserEntity.Returns(user);
+        var handler = new UnshareBudgetCommandHandler(context, Mocks.UserProviderMock);
+        context.Users.Add(user);
+        context.Budgets.Add(Mocks.BudgetEntity);
+        context.SaveChanges();
+
+        await handler.Handle(new UnshareBudgetCommand(Mocks.BudgetGuid, user.Id), CancellationToken.None);
+        var resultUser = context.Users.SingleOrDefault(p => p.Id == user.Id);
+
+        Assert.NotNull(resultUser!.BudgetsAccessible);
+        Assert.Empty(resultUser!.BudgetsAccessible);
     }
 }
