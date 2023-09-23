@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Core.Categories.Queries.GetCategoriesByBudgetId;
+using Tivix.FamilyBudget.Server.Core.Users.Providers;
+using Tivix.FamilyBudget.Server.Core.Users.Validators;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
@@ -37,8 +39,9 @@ internal class CreateFinancialEntryCommandHandler : IRequestHandler<CreateFinanc
 
 internal class CreateFinancialEntryCommandHandlerValidator : AbstractValidator<CreateFinancialEntryCommand>
 {
-    public CreateFinancialEntryCommandHandlerValidator()
+    public CreateFinancialEntryCommandHandlerValidator(IUserProvider userProvider, ApplicationContext applicationContext)
     {
-        //TODO: Add Validation
+        RuleFor(p=>p.Name).NotEmpty();
+        RuleFor(p => p.CategoryId).SetValidator(new UserCategoryValidator(userProvider, applicationContext));
     }
 }

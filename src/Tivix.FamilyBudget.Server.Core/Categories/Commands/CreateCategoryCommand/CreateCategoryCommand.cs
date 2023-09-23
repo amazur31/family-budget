@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
@@ -30,8 +29,14 @@ internal class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComm
 
 internal class CreateCategoryCommandHandlerValidator : AbstractValidator<CreateCategoryCommand>
 {
-    public CreateCategoryCommandHandlerValidator()
+    public CreateCategoryCommandHandlerValidator(ApplicationContext applicationContext)
     {
-        //TODO: Add Validation
+        RuleFor(p => p.BudgetId).Must(BudgetExists);
+        RuleFor(p => p.Name).NotEmpty();
+
+        bool BudgetExists(Guid budgetId)
+        {
+            return applicationContext.Budgets.Any(p => p.Id == budgetId);
+        }
     }
 }

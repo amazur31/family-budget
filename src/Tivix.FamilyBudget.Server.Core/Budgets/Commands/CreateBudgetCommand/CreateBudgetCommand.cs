@@ -38,9 +38,6 @@ internal class CreateBudgetCommandValidator : AbstractValidator<CreateBudgetComm
 {
     public CreateBudgetCommandValidator()
     {
-        //TODO: Add User Validation
-        //TODO: Add Exists validation
-
         RuleFor(p => p.Name).NotEmpty();
     }
 }

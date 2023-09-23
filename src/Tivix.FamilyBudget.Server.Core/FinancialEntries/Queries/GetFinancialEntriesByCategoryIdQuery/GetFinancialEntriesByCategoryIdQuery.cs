@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Tivix.FamilyBudget.Server.Core.FinancialEntries.Commands.UpdateFinancialEntryCommand;
+using Tivix.FamilyBudget.Server.Core.Users.Providers;
+using Tivix.FamilyBudget.Server.Core.Users.Validators;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
 namespace Tivix.FamilyBudget.Server.Core.FinancialEntries.Queries.GetFinancialEntriesByCategoryIdQuery;
@@ -31,9 +32,9 @@ internal class GetFinancialEntriesByCategoryIdQueryHandler : IRequestHandler<Get
 
 internal class GetFinancialEntriesByCategoryIdQueryHandlerValidator : AbstractValidator<GetFinancialEntriesByCategoryIdQuery>
 {
-    public GetFinancialEntriesByCategoryIdQueryHandlerValidator()
+    public GetFinancialEntriesByCategoryIdQueryHandlerValidator(IUserProvider userProvider, ApplicationContext applicationContext)
     {
-        //TODO: Add Validation
+        RuleFor(p => p.CategoryId).SetValidator(new UserCategoryValidator(userProvider, applicationContext));
     }
 }
 

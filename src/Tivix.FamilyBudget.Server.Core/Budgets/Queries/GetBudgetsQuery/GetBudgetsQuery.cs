@@ -26,11 +26,3 @@ public class GetBudgetByIdQueryHandler : IRequestHandler<GetBudgetsQuery, GetBud
         return new(budgets.Select(p => new GetBudgetsQueryResponseBudget(p.Id, p.Name)).ToList());
     }
 }
-
-internal class GetBudgetByIdQueryHandlerValidator : AbstractValidator<GetBudgetsQuery>
-{
-    public GetBudgetByIdQueryHandlerValidator()
-    {
-        //TODO: Add Validation
-    }
-}

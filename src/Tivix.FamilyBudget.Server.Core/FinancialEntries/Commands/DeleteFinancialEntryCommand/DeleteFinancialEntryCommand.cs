@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Tivix.FamilyBudget.Server.Core.Users.Providers;
+using Tivix.FamilyBudget.Server.Core.Users.Validators;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
 namespace Tivix.FamilyBudget.Server.Core.FinancialEntries.Commands.DeleteFinancialEntryCommand;
@@ -25,8 +27,8 @@ internal class DeleteFinancialEntryCommandHandler : IRequestHandler<DeleteFinanc
 
 internal class DeleteFinancialEntryCommandHandlerValidator : AbstractValidator<DeleteFinancialEntryCommand>
 {
-    public DeleteFinancialEntryCommandHandlerValidator()
+    public DeleteFinancialEntryCommandHandlerValidator(IUserProvider userProvider, ApplicationContext applicationContext)
     {
-        //TODO: Add Validation
+        RuleFor(p => p.Id).SetValidator(new UserFinancialEntryValidator(userProvider, applicationContext));
     }
 }

@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Core.Users.Providers;
+using Tivix.FamilyBudget.Server.Core.Users.Validators;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
 namespace Tivix.FamilyBudget.Server.Core.Budgets.Commands.UnshareBudgetCommandHandler;
@@ -28,8 +29,9 @@ internal class UnshareBudgetCommandHandler : IRequestHandler<UnshareBudgetComman
 
 internal class UnshareBudgetCommandHandlerValidator : AbstractValidator<UnshareBudgetCommand>
 {
-    public UnshareBudgetCommandHandlerValidator()
+    public UnshareBudgetCommandHandlerValidator(IUserProvider userProvider, ApplicationContext applicationContext)
     {
-        //TODO: Add Validation
+        RuleFor(p => p.BudgetId).SetValidator(new UserBudgetValidator(userProvider, applicationContext));
+        RuleFor(p => p.TargetUserId).SetValidator(new UserExistsValidator(userProvider, applicationContext));
     }
 }
