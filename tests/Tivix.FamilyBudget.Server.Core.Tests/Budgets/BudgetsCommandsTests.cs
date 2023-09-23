@@ -1,6 +1,8 @@
 ﻿using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
+using Tivix.FamilyBudget.Server.Core.Budgets.Commands.DeleteBudgetCommand;
 using Tivix.FamilyBudget.Server.Core.Budgets.Commands.ShareBudgetCommand;
 using Tivix.FamilyBudget.Server.Core.Budgets.Commands.UnshareBudgetCommandHandler;
+using Tivix.FamilyBudget.Server.Core.Budgets.Commands.UpdateBudgetCommand;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
@@ -28,6 +30,40 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
             Assert.NotNull(result);
             Assert.Equal("SomeName", result.Name);
             Assert.NotNull(context.Budgets.Single(p => p.Id == result.Id));
+        }
+    }
+
+    [Fact]
+    public async void UpdateBudgetCommandHandler_UpdatesBudget_ForCorrectCommand()
+    {
+        using var context = _fixture.Context;
+        {
+            Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
+            context.Budgets.Add(Mocks.BudgetEntity);
+            context.SaveChanges();
+            var handler = new UpdateBudgetCommandHandler(context, Mocks.UserProviderMock);
+
+            var result = await handler.Handle(new UpdateBudgetCommand(Mocks.BudgetGuid, "SomeName2"), CancellationToken.None);
+
+            Assert.NotNull(result);
+            Assert.Equal("SomeName2", result.Name);
+            Assert.NotNull(context.Budgets.Single(p => p.Id == result.Id));
+        }
+    }
+
+    [Fact]
+    public async void DeleteBudgetCommandHandler_DeletesBudget_ForCorrectCommand()
+    {
+        using var context = _fixture.Context;
+        {
+            Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
+            context.Budgets.Add(Mocks.BudgetEntity);
+            context.SaveChanges();
+            var handler = new DeleteBudgetCommandHandler(context, Mocks.UserProviderMock);
+
+            await handler.Handle(new DeleteBudgetCommand(Mocks.BudgetGuid), CancellationToken.None);
+
+            Assert.Null(context.Budgets.SingleOrDefault(p => p.Id == Mocks.BudgetGuid));
         }
     }
 
