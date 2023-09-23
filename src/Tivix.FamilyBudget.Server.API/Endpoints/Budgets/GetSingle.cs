@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetById;
+using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetBudgetByIdQuery;
 
 namespace Tivix.FamilyBudget.Server.API.Endpoints.Budgets;
 
