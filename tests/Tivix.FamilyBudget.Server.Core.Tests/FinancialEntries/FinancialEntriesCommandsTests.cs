@@ -50,20 +50,22 @@ public class FinancialEntriesCommandsTests : IClassFixture<ApplicationDataFixtur
     public async void UpdateFinancialEntryCommandHandler_UpdatesFinancialEntry_ForCorrectCommand()
     {
         using var context = _fixture.Context;
-        Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
-        var handler = new UpdateFinancialEntryCommandHandler(context);
-        context.FinancialEntries.Add(Mocks.FinancialEntryEntity);
-        var newCategory = Mocks.CategoryEntity;
-        newCategory.Id = Guid.NewGuid();
-        context.Categories.Add(newCategory);
-        context.SaveChanges();
+        {
+            Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
+            var handler = new UpdateFinancialEntryCommandHandler(context);
+            context.FinancialEntries.Add(Mocks.FinancialEntryEntity);
+            var newCategory = Mocks.CategoryEntity;
+            newCategory.Id = Guid.NewGuid();
+            context.Categories.Add(newCategory);
+            context.SaveChanges();
 
-        var result = await handler.Handle(new UpdateFinancialEntryCommand(Mocks.FinancialEntryGuid, "SomeName2", false, newCategory.Id), CancellationToken.None); ;
+            var result = await handler.Handle(new UpdateFinancialEntryCommand(Mocks.FinancialEntryGuid, "SomeName2", false, newCategory.Id), CancellationToken.None); ;
 
-        Assert.NotNull(result);
-        Assert.Equal("SomeName2", result.Name);
-        Assert.False(result.IsExpense);
-        Assert.Equal(newCategory.Id, result.CategoryId);
-        Assert.NotNull(context.FinancialEntries.Single(p => p.Id == result.Id));
+            Assert.NotNull(result);
+            Assert.Equal("SomeName2", result.Name);
+            Assert.False(result.IsExpense);
+            Assert.Equal(newCategory.Id, result.CategoryId);
+            Assert.NotNull(context.FinancialEntries.Single(p => p.Id == result.Id));
+        }
     }
 }
