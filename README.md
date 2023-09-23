@@ -2,14 +2,7 @@
 
 This repository contains the Family Budget application, which is part of the Tivix recruitment process.
 
-## TODO
-
-- Implement budget deletion with cascade (or set IsDeleted flag)
-- Implement category deletion with cascade (or set IsDeleted flag)
-- Implement category update (name)
-- Dockerize the application
-- Set up a CI/CD pipeline
-- If time permits, work on the frontend
+## Docker Setup
 
 ## Local Setup
 
