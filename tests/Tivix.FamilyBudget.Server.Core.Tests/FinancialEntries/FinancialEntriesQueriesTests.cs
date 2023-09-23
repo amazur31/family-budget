@@ -3,7 +3,7 @@ using Tivix.FamilyBudget.Server.Core.Tests.Categories;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 
-[Collection("FinancialEntriesQueriesTests")]
+[Collection("FinancialEntriesTests")]
 public class FinancialEntriesQueriesTests : IClassFixture<FinancialEntriesQueriesDataFixture>
 {
     private readonly FinancialEntriesQueriesDataFixture _fixture;
