@@ -116,6 +116,10 @@ The choice of xUnit as the testing framework is a matter of personal preference.
 
 The use of NSubstitute over other mocking libraries was influenced by recent events related to Moq.
 
+### Why is my Swagger dark?
+
+I got tired of having my retinas burned at 2 AM by Swagger auto-running in my browser with the power of a thousand suns.
+
 ### Why so many models?
 
 This project utilizes multiple models for each command, allowing for better control over returned data. It follows a vertical architecture approach to neatly organize and manage data models.
