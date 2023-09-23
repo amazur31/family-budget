@@ -19,7 +19,7 @@ internal class UpdateFinancialEntryCommandHandler : IRequestHandler<UpdateFinanc
         var entry = _context.FinancialEntries.Single(p=>p.Id == request.Id);
         entry.Name = request.Name;
         entry.IsExpense = request.IsExpense;
-        var category = _context.Categories.Single(p=>p.Id == request.Id);
+        var category = _context.Categories.Single(p=>p.Id == request.CategoryId);
         entry.Category = category;
 
         await _context.SaveChangesAsync(cancellationToken);
