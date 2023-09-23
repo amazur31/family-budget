@@ -2,14 +2,14 @@
 using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetSharedBudgets;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
-namespace Tivix.FamilyBudget.Server.Core.Tests;
+namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 
 [Collection("BudgetsTests")]
-public class BudgetsQueriesTests : IClassFixture<ApplicationDataFixture>
+public class BudgetsQueriesTests : IClassFixture<BudgetsQueriesDataFixture>
 {
-    readonly ApplicationDataFixture _fixture;
+    readonly BudgetsQueriesDataFixture _fixture;
 
-    public BudgetsQueriesTests(ApplicationDataFixture fixture)
+    public BudgetsQueriesTests(BudgetsQueriesDataFixture fixture)
     {
         _fixture = fixture;
     }

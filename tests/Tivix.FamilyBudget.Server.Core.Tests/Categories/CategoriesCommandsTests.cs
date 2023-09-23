@@ -5,11 +5,11 @@ using Tivix.FamilyBudget.Server.Core.Categories.Commands.UpdateCategoryCommand;
 namespace Tivix.FamilyBudget.Server.Core.Tests.Categories;
 
 [Collection("CategoriesTests")]
-public class CategoriesCommandsTests : IClassFixture<ApplicationDataFixture>
+public class CategoriesCommandsTests : IClassFixture<CategoriesCommandsDataFixture>
 {
-    private readonly ApplicationDataFixture _fixture;
+    private readonly CategoriesCommandsDataFixture _fixture;
 
-    public CategoriesCommandsTests(ApplicationDataFixture fixture)
+    public CategoriesCommandsTests(CategoriesCommandsDataFixture fixture)
     {
         _fixture = fixture;
     }

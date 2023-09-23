@@ -8,11 +8,11 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 
 [Collection("BudgetsTests")]
-public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
+public class BudgetsCommandsTests : IClassFixture<BudgetsCommandsDataFixture>
 {
-    private readonly ApplicationDataFixture _fixture;
+    private readonly BudgetsCommandsDataFixture _fixture;
 
-    public BudgetsCommandsTests(ApplicationDataFixture fixture)
+    public BudgetsCommandsTests(BudgetsCommandsDataFixture fixture)
     {
         _fixture = fixture;
     }

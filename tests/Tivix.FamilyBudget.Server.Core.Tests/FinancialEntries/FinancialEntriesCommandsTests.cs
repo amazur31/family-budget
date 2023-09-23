@@ -1,15 +1,16 @@
 ﻿using Tivix.FamilyBudget.Server.Core.FinancialEntries.Commands.CreateFinancialEntryCommand;
 using Tivix.FamilyBudget.Server.Core.FinancialEntries.Commands.DeleteFinancialEntryCommand;
 using Tivix.FamilyBudget.Server.Core.FinancialEntries.Commands.UpdateFinancialEntryCommand;
+using Tivix.FamilyBudget.Server.Core.Tests.Categories;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 
 [Collection("FinancialEntriesTests")]
-public class FinancialEntriesCommandsTests : IClassFixture<ApplicationDataFixture>
+public class FinancialEntriesCommandsTests : IClassFixture<FinancialEntriesCommandsDataFixture>
 {
-    readonly ApplicationDataFixture _fixture;
+    readonly FinancialEntriesCommandsDataFixture _fixture;
 
-    public FinancialEntriesCommandsTests(ApplicationDataFixture fixture)
+    public FinancialEntriesCommandsTests(FinancialEntriesCommandsDataFixture fixture)
     {
         _fixture = fixture;
     }
