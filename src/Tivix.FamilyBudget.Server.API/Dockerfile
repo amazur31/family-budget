@@ -1,16 +1,19 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["Tivix.FamilyBudget.Server.API.csproj", "."]
-RUN dotnet restore "./Tivix.FamilyBudget.Server.API.csproj"
+COPY ["src/Tivix.FamilyBudget.Server.API/Tivix.FamilyBudget.Server.API.csproj", "src/Tivix.FamilyBudget.Server.API/"]
+COPY ["src/Tivix.FamilyBudget.Server.Core/Tivix.FamilyBudget.Server.Core.csproj", "src/Tivix.FamilyBudget.Server.Core/"]
+COPY ["src/Tivix.FamilyBudget.Server.Infrastructure/Tivix.FamilyBudget.Server.Infrastructure.csproj", "src/Tivix.FamilyBudget.Server.Infrastructure/"]
+RUN dotnet restore "src/Tivix.FamilyBudget.Server.API/Tivix.FamilyBudget.Server.API.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/src/Tivix.FamilyBudget.Server.API"
 RUN dotnet build "Tivix.FamilyBudget.Server.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
