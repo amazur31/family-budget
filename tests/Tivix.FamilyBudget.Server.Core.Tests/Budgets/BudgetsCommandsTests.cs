@@ -15,7 +15,7 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
     [Fact]
     public async void CreateBudgetCommandHandler_AddsBudget_ForCorrectCommand()
     {
-        Mocks.UserProviderMock.UserEntity.Returns(Mocks.User);
+        Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
         var handler = new CreateBudgetCommandHandler(_fixture.BudgetsCommands, Mocks.UserProviderMock);
 
         var result = await handler.Handle(new CreateBudgetCommand("SomeName"), CancellationToken.None);
