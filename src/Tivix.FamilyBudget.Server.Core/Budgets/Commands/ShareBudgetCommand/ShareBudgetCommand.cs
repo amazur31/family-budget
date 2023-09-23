@@ -5,7 +5,7 @@ using Tivix.FamilyBudget.Server.Core.Users.Providers;
 using Tivix.FamilyBudget.Server.Core.Users.Validators;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 
-namespace Tivix.FamilyBudget.Server.Core.Budgets.Commands.ShareBudgetCommandHandler;
+namespace Tivix.FamilyBudget.Server.Core.Budgets.Commands.ShareBudgetCommand;
 
 public record ShareBudgetCommand(Guid BudgetId, Guid TargetUserId) : IRequest;
 
