@@ -4,6 +4,8 @@ This repository contains the Family Budget application, which is part of the Tiv
 
 ## Docker Setup
 
+`docker build -f src\Tivix.FamilyBudget.Server.API -t familybudget .`
+
 ## Local Setup
 
 ### Requirements
