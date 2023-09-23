@@ -34,7 +34,7 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
     public async void ShareBudgetCommandHandler_SharesBudget_ForCorrectCommand()
     {
         using var context = _fixture.Context;
-        var handler = new ShareBudgetCommandHandler(context, Mocks.UserProviderMock);
+        var handler = new ShareBudgetCommandHandler(context);
         var userWithAccess = new UserEntity() { Id = Guid.NewGuid() };
         context.Users.Add(userWithAccess);
         context.Budgets.Add(Mocks.BudgetEntity);
@@ -53,7 +53,7 @@ public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
         using var context = _fixture.Context;
         var user = new UserEntity() { Id = Guid.NewGuid(), BudgetsAccessible = new List<Guid>() { Mocks.BudgetGuid } };
         Mocks.UserProviderMock.UserEntity.Returns(user);
-        var handler = new UnshareBudgetCommandHandler(context, Mocks.UserProviderMock);
+        var handler = new UnshareBudgetCommandHandler(context);
         context.Users.Add(user);
         context.Budgets.Add(Mocks.BudgetEntity);
         context.SaveChanges();

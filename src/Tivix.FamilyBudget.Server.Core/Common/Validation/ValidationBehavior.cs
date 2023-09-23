@@ -22,7 +22,7 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             .Where(x => x != null)
             .ToList();
 
-        if (errorsDictionary.Any())
+        if (errorsDictionary.Count != 0)
         {
             throw new ValidationException(errorsDictionary);
         }

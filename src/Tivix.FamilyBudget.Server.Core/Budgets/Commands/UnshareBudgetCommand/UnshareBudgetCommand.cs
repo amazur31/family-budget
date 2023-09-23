@@ -12,16 +12,14 @@ public record UnshareBudgetCommand(Guid BudgetId, Guid TargetUserId) : IRequest;
 internal class UnshareBudgetCommandHandler : IRequestHandler<UnshareBudgetCommand>
 {
     readonly ApplicationContext _context;
-    readonly IUserProvider _userProvider;
-    public UnshareBudgetCommandHandler(ApplicationContext context, IUserProvider userProvider)
+    public UnshareBudgetCommandHandler(ApplicationContext context)
     {
         _context = context;
-        _userProvider = userProvider;
     }
 
     public async Task Handle(UnshareBudgetCommand request, CancellationToken cancellationToken)
     {
-        var targetUser = await _context.Users.SingleAsync(p => p.Id == request.TargetUserId);
+        var targetUser = await _context.Users.SingleAsync(p => p.Id == request.TargetUserId, cancellationToken: cancellationToken);
         targetUser.BudgetsAccessible!.Remove(request.BudgetId);
         _context.SaveChanges();
     }
@@ -32,6 +30,6 @@ internal class UnshareBudgetCommandHandlerValidator : AbstractValidator<UnshareB
     public UnshareBudgetCommandHandlerValidator(IUserProvider userProvider, ApplicationContext applicationContext)
     {
         RuleFor(p => p.BudgetId).SetValidator(new UserBudgetValidator(userProvider, applicationContext));
-        RuleFor(p => p.TargetUserId).SetValidator(new UserExistsValidator(userProvider, applicationContext));
+        RuleFor(p => p.TargetUserId).SetValidator(new UserExistsValidator(applicationContext));
     }
 }

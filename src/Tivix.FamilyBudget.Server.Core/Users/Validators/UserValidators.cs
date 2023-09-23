@@ -11,9 +11,6 @@ internal class UserBudgetValidator : AbstractValidator<Guid>
 {
     public UserBudgetValidator(IUserProvider userProvider, ApplicationContext context)
     {
-        var _userProvider = userProvider;
-        var _context = context;
-
         RuleFor(p => p).Must(ValidateUser).WithMessage("No access to this resource"); ;
 
         bool ValidateUser(Guid budgetId)
@@ -21,7 +18,7 @@ internal class UserBudgetValidator : AbstractValidator<Guid>
             var user = userProvider.UserEntity;
             if (user!.BudgetsAccessible == null || !user.BudgetsAccessible.Contains(budgetId))
             {
-                return _context.Budgets.First(p => p.Id == budgetId).User.Id == userProvider.UserEntity!.Id;
+                return context.Budgets.First(p => p.Id == budgetId).User.Id == userProvider.UserEntity!.Id;
             }
 
             return true;
@@ -36,14 +33,11 @@ internal class UserCategoryValidator : AbstractValidator<Guid>
 {
     public UserCategoryValidator(IUserProvider userProvider, ApplicationContext context)
     {
-        var _userProvider = userProvider;
-        var _context = context;
-
         RuleFor(p => p).Must(ValidateUser).WithMessage("No access to this resource"); ;
 
         bool ValidateUser(Guid categoryId)
         {
-            var category = _context.Categories.First(p=>p.Id == categoryId);
+            var category = context.Categories.First(p=>p.Id == categoryId);
             return category.Id == userProvider.UserEntity!.Id;
         }
     }
@@ -56,15 +50,12 @@ internal class UserFinancialEntryValidator : AbstractValidator<Guid>
 {
     public UserFinancialEntryValidator(IUserProvider userProvider, ApplicationContext context)
     {
-        var _userProvider = userProvider;
-        var _context = context;
-
         RuleFor(p => p).Must(ValidateUser).WithMessage("No access to this resource"); ;
 
         bool ValidateUser(Guid financialEntryId)
         {
-            var financialEntry = _context.FinancialEntries.First(p=>p.Id == financialEntryId);
-            return _context.Budgets.First(p => p.Id == financialEntry.Category.Id).User.Id == userProvider.UserEntity!.Id;
+            var financialEntry = context.FinancialEntries.First(p=>p.Id == financialEntryId);
+            return context.Budgets.First(p => p.Id == financialEntry.Category.Id).User.Id == userProvider.UserEntity!.Id;
         }
     }
 }
@@ -74,16 +65,13 @@ internal class UserFinancialEntryValidator : AbstractValidator<Guid>
 /// </summary>
 internal class UserExistsValidator : AbstractValidator<Guid>
 {
-    public UserExistsValidator(IUserProvider userProvider, ApplicationContext context)
+    public UserExistsValidator(ApplicationContext context)
     {
-        var _userProvider = userProvider;
-        var _context = context;
-
         RuleFor(p => p).Must(ValidateUser).WithMessage("User does not exist"); ;
 
         bool ValidateUser(Guid userId)
         {
-            return _context.Users.First(p => p.Id == userId).Id == userId;
+            return context.Users.First(p => p.Id == userId).Id == userId;
         }
     }
 }
