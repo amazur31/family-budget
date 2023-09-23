@@ -5,11 +5,8 @@ Application for Tivix recruitment process
 
 TODO:
 budget delete cascade (or set IsDeleted flag)
-budget update (name)
-budget update (share)
 category delete cascade (or set IsDeleted flag)
 category update (name)
-Transactions (income expense, post, get, update, delete)
 Docker
 Pipeline
 if time permits - frontend
