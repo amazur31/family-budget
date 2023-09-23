@@ -1,12 +1,11 @@
 ﻿using Tivix.FamilyBudget.Server.Core.Budgets.Commands.CreateBudgetCommand;
 using Tivix.FamilyBudget.Server.Core.Budgets.Commands.ShareBudgetCommandHandler;
 using Tivix.FamilyBudget.Server.Core.Budgets.Commands.UnshareBudgetCommandHandler;
-using Tivix.FamilyBudget.Server.Core.Budgets.Queries.GetSharedBudgets;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 
-[Collection("BudgetsTests")]
+[Collection("BudgetsCommandsTests")]
 public class BudgetsCommandsTests : IClassFixture<ApplicationDataFixture>
 {
     private readonly ApplicationDataFixture _fixture;

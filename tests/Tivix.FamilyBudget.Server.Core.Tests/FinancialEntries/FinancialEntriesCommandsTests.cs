@@ -4,7 +4,7 @@ using Tivix.FamilyBudget.Server.Core.FinancialEntries.Commands.UpdateFinancialEn
 
 namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 
-[Collection("FinancialEntriesTests")]
+[Collection("FinancialEntriesCommandsTests")]
 public class FinancialEntriesCommandsTests : IClassFixture<ApplicationDataFixture>
 {
     readonly ApplicationDataFixture _fixture;

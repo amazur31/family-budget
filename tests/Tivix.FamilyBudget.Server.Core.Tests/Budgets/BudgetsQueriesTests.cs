@@ -4,7 +4,7 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests;
 
-[Collection("BudgetsTests")]
+[Collection("BudgetsQueriesTests")]
 public class BudgetsQueriesTests : IClassFixture<ApplicationDataFixture>
 {
     readonly ApplicationDataFixture _fixture;
