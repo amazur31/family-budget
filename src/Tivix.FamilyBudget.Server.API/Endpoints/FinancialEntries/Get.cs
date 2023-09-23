@@ -26,6 +26,6 @@ public class Get : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<GetCateg
 
     public override async Task<ActionResult<GetCategoriesByBudgetIdResponse>> HandleAsync([FromQuery] Guid categoryId, CancellationToken cancellationToken = default)
     {
-        return Ok(await _mediator.Send(new GetCategoriesByBudgetIdQuery(budgetId), cancellationToken));
+        return Ok(await _mediator.Send(new GetCategoriesByBudgetIdQuery(categoryId), cancellationToken));
     }
 }
