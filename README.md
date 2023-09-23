@@ -15,8 +15,11 @@ if time permits - frontend
 <h1># Local Setup </h1>
 
 Required:
+
 Postgre 15.4 or higher `https://www.postgresql.org/download/`
+
 C# 11
+
 .NET 8 https://dotnet.microsoft.com/en-us/download/dotnet/8.0
 
 Step by step:
