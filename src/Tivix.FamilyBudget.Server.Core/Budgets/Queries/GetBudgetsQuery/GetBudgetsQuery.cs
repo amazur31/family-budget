@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Tivix.FamilyBudget.Server.Core.Users.Providers;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL;
@@ -23,5 +24,13 @@ public class GetBudgetByIdQueryHandler : IRequestHandler<GetBudgetsQuery, GetBud
         var user = _userProvider.UserEntity;
         var budgets = await _context.Budgets.AsNoTracking().Where(p => p.User == user).ToListAsync(cancellationToken: cancellationToken);
         return new(budgets.Select(p => new GetBudgetsQueryResponseBudget(p.Id, p.Name)).ToList());
+    }
+}
+
+internal class GetBudgetByIdQueryHandlerValidator : AbstractValidator<GetBudgetsQuery>
+{
+    public GetBudgetByIdQueryHandlerValidator()
+    {
+        //TODO: Add Validation
     }
 }
