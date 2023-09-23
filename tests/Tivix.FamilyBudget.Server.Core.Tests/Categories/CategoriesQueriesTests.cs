@@ -6,6 +6,12 @@ namespace Tivix.FamilyBudget.Server.Core.Tests.Categories;
 [Collection("CategoriesTests")]
 public class CategoriesQueriesTests
 {
+    Mocks Mocks { get; set; }
+    public CategoriesQueriesTests()
+    {
+        Mocks = new Mocks();
+    }
+
     [Fact]
     public async void GetCategoriesByBudgetIdQueryHandler_GetsCategory_ForCorrectQuery()
     {
@@ -13,7 +19,6 @@ public class CategoriesQueriesTests
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             var handler = new GetCategoriesByBudgetIdQueryHandler(context);
-            context.Budgets.Add(Mocks.BudgetEntity);
             var category = Mocks.CategoryEntity;
             category.Budget = Mocks.BudgetEntity;
             context.Categories.Add(category);

@@ -4,29 +4,38 @@ using Tivix.FamilyBudget.Server.Infrastructure.DAL;
 using Tivix.FamilyBudget.Server.Infrastructure.DAL.Entities;
 
 namespace Tivix.FamilyBudget.Server.Core.Tests;
-public static class Mocks
+public class Mocks
 {
-    public static Guid UserGuid => Guid.Parse("d5622414-4757-4023-b24c-f8ae19af0747");
-    public static readonly UserEntity UserEntity = new() { Id = UserGuid };
+    public Mocks()
+    {
+        UserGuid = Guid.NewGuid();
+        CategoryGuid = Guid.NewGuid();
+        BudgetGuid = Guid.NewGuid();
+        FinancialEntryGuid = Guid.NewGuid();
 
-    public static Guid CategoryGuid => Guid.Parse("8408a432-19a9-4f25-a494-f6ddd1ae0db4");
-    public static readonly CategoryEntity CategoryEntity = new()
+    }
+
+    public Guid UserGuid { get; private set; }
+    public UserEntity UserEntity => new() { Id = UserGuid };
+
+    public Guid CategoryGuid { get; private set; }
+    public CategoryEntity CategoryEntity => new()
     {
         Id = CategoryGuid,
         Budget = BudgetEntity!,
         Name = "CategoryName"
     };
 
-    public static Guid BudgetGuid => Guid.Parse("5fefccda-dd0c-4370-ab87-52b04fe28ef8");
-    public static readonly BudgetEntity BudgetEntity = new()
+    public Guid BudgetGuid { get; private set; }
+    public BudgetEntity BudgetEntity => new()
     {
         Id = BudgetGuid,
         Name = "BudgetName",
         User = UserEntity
     };
 
-    public static Guid FinancialEntryGuid => Guid.Parse("46509b58-9a00-48b3-9a63-cd7c27bbf138");
-    public static readonly FinancialEntryEntity FinancialEntryEntity = new()
+    public Guid FinancialEntryGuid { get; private set; }
+    public FinancialEntryEntity FinancialEntryEntity => new()
     {
         Id = FinancialEntryGuid,
         Name = "FinancialEntryName",
@@ -34,13 +43,13 @@ public static class Mocks
         IsExpense = true
     };
 
-    public static IUserProvider UserProviderMock = Substitute.For<IUserProvider>();
+    public IUserProvider UserProviderMock = Substitute.For<IUserProvider>();
 
-    public static ApplicationContext GetApplicationContext()
+    public ApplicationContext GetApplicationContext()
     {
         return GetApplicationContext(Guid.NewGuid().ToString());
     }
-    public static ApplicationContext GetApplicationContext(string dbName)
+    public ApplicationContext GetApplicationContext(string dbName)
     {
         return new ApplicationContext(new DbContextOptionsBuilder<ApplicationContext>()
         .UseInMemoryDatabase(dbName)

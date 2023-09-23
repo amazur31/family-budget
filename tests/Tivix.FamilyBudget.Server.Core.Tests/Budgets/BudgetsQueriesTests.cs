@@ -7,6 +7,12 @@ namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 [Collection("BudgetsTests")]
 public class BudgetsQueriesTests
 {
+    Mocks Mocks { get; set; }
+    public BudgetsQueriesTests()
+    {
+        Mocks = new Mocks();
+    }
+
     [Fact]
     public async void GetBudgetByIdQueryHandler_GetsBudget_ForCorrectQuery()
     {

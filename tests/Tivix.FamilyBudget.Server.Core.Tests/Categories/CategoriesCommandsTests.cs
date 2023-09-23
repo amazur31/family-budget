@@ -7,6 +7,12 @@ namespace Tivix.FamilyBudget.Server.Core.Tests.Categories;
 [Collection("CategoriesTests")]
 public class CategoriesCommandsTests
 {
+    Mocks Mocks { get; set; }
+    public CategoriesCommandsTests()
+    {
+        Mocks = new Mocks();
+    }
+
     [Fact]
     public async void CreateCategoriesCommandHandler_AddsCategory_ForCorrectCommand()
     {

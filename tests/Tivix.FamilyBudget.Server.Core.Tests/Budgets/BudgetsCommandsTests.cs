@@ -10,6 +10,12 @@ namespace Tivix.FamilyBudget.Server.Core.Tests.Budgets;
 [Collection("BudgetsTests")]
 public class BudgetsCommandsTests
 {
+    Mocks Mocks { get; set; }
+    public BudgetsCommandsTests()
+    {
+        Mocks = new Mocks();
+    }
+
     [Fact]
     public async void CreateBudgetCommandHandler_AddsBudget_ForCorrectCommand()
     {

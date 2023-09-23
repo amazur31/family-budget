@@ -8,6 +8,11 @@ namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 [Collection("FinancialEntriesTests")]
 public class FinancialEntriesCommandsTests
 {
+    Mocks Mocks { get; set; }
+    public FinancialEntriesCommandsTests()
+    {
+        Mocks = new Mocks();
+    }
 
     [Fact]
     public async void CreateFinancialEntryCommandHandler_AddsFinancialEntry_ForCorrectCommand()
@@ -52,10 +57,11 @@ public class FinancialEntriesCommandsTests
         {
             Mocks.UserProviderMock.UserEntity.Returns(Mocks.UserEntity);
             var handler = new UpdateFinancialEntryCommandHandler(context);
-            context.FinancialEntries.Add(Mocks.FinancialEntryEntity);
+            var financialEntry = Mocks.FinancialEntryEntity;
             var newCategory = Mocks.CategoryEntity;
             newCategory.Id = Guid.NewGuid();
-            context.Categories.Add(newCategory);
+            financialEntry.Category = newCategory;
+            context.FinancialEntries.Add(financialEntry);
             context.SaveChanges();
 
             var result = await handler.Handle(new UpdateFinancialEntryCommand(Mocks.FinancialEntryGuid, "SomeName2", false, newCategory.Id), CancellationToken.None); ;

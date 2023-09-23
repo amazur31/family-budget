@@ -6,6 +6,11 @@ namespace Tivix.FamilyBudget.Server.Core.Tests.FinancialEntries;
 [Collection("FinancialEntriesTests")]
 public class FinancialEntriesQueriesTests
 {
+    Mocks Mocks { get; set; }
+    public FinancialEntriesQueriesTests()
+    {
+        Mocks = new Mocks();
+    }
 
     [Fact]
     public async void GetFinancialEntriesByCategoryIdQueryHandler_GetsFinancialEntries_ForCorrectQuery()
@@ -13,8 +18,11 @@ public class FinancialEntriesQueriesTests
         using var context = Mocks.GetApplicationContext();
         {
             var handler = new GetFinancialEntriesByCategoryIdQueryHandler(context);
-            context.Categories.Add(Mocks.CategoryEntity);
-            context.FinancialEntries.Add(Mocks.FinancialEntryEntity);
+            var category = Mocks.CategoryEntity;
+            context.Categories.Add(category);
+            var financialEntry = Mocks.FinancialEntryEntity;
+            financialEntry.Category = category;
+            context.FinancialEntries.Add(financialEntry);
             context.SaveChanges();
 
             var result = await handler.Handle(new GetFinancialEntriesByCategoryIdQuery(Mocks.CategoryGuid), CancellationToken.None);
