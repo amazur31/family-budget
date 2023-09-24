@@ -13,6 +13,7 @@ This repository contains the Family Budget application, which is part of the Tiv
 `docker compose up`
 
 Navigate to `http://localhost:8000/healthz`
+
 You can run migrations with [Migrate.exe](https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/migrations/migrate-exe):
 `docker exec familybudget Migration.exe`
 
