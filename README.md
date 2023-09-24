@@ -5,8 +5,11 @@ This repository contains the Family Budget application, which is part of the Tiv
 ## Docker Setup
 
 `cd <yourRepoPath>/family-budget`
+
 `docker build -f src\Tivix.FamilyBudget.Server.API\Dockerfile -t familybudget .`
+
 `docker run --rm -it -p 8000:8080 familybudget`
+
 `docker compose up`
 
 Navigate to `http://localhost:8000/healthz`
